@@ -55,8 +55,10 @@ Function global:GitBinding {
         's' { git status $Params }
         # tag
         't' { git tag $Params }
+        # checkout
+        'c' { git checkout $Params }
         # commit
-        'c' { git commit $Params }
+        'co' { git commit $Params }
         # clone repo
         'cl' { git clone $Params }
         # reset changes
