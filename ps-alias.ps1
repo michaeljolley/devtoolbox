@@ -108,6 +108,57 @@ function Restart-PowerShell {
     Write-Warning 'Only usable while in the PowerShell console host'
 }
 
+# Test if the PSHost session has an administrative token (i.e. elevated host)
+function Test-PSHostHasAdministrator {
+    $p = New-Object System.Security.Principal.WindowsPrincipal([System.Security.Principal.WindowsIdentity]::GetCurrent())
+    if ($p.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        return $true
+    }
+    else {
+        return $false
+    }
+    return $false
+}
+
+# Restart the PSHost using the same arguments as the current PSHost and allow the user to request an administrative token as well
+function Restart-PSHost {
+    [CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]
+    param
+    (
+    [switch]$AsAdministrator,
+    [switch]$Force
+    )
+    $proc = Get-Process -Id $PID
+    $cmdArgs = [Environment]::GetCommandLineArgs() | Select-Object -Skip 1
+    $params = @{FilePath=$proc.Path}
+    if ($AsAdministrator){$params.Verb = 'runas'}
+    if ($cmdArgs){$params.ArgumentList = $cmdArgs}
+    if ($Force -or $PSCmdlet.ShouldProcess($proc.Name,"Restart the console")) {
+        if ($host.Name -eq 'Windows PowerShell ISE Host' -and $psISE.PowerShellTabs.Files.IsSaved -contains $false) {
+            if ($Force -or $PSCmdlet.ShouldProcess('Unsaved work detected?','Unsaved work detected. Save changes?','Confirm')) {
+                foreach ($IseTab in $psISE.PowerShellTabs) {
+                    $IseTab.Files | ForEach-Object { 
+                        if ($_.IsUntitled -and !$_.IsSaved) {
+                            $_.SaveAs($_.FullPath,[System.Text.Encoding]::UTF8)
+                        }
+                        elseif(!$_.IsSaved) {
+                            $_.Save()
+                        }
+                    }
+                }
+            }
+            else {
+                foreach ($IseTab in $psISE.PowerShellTabs) {
+                    $unsavedFiles = $IseTab.Files | Where-Object IsSaved -eq $false
+                    $unsavedFiles | ForEach-Object {$IseTab.Files.Remove($_,$true)}
+                }
+            }
+        }
+        Start-Process @params
+        $proc.CloseMainWindow()
+    }
+}
+
 # This code breaks the powershell reload infinite loop, so it's not calling itself forever.
 $parentProcessId = (Get-WmiObject Win32_Process -Filter "ProcessId=$PID").ParentProcessId
 $parentProcessName = (Get-WmiObject Win32_Process -Filter "ProcessId=$parentProcessId").ProcessName
