@@ -12,6 +12,8 @@ Function DockerBinding {
 
     Switch ($Cmd) 
     {
+        # build
+        'b' { docker build $Params }
         # list containers
         'c' { docker container ps $Params }
         # stop container
@@ -20,31 +22,24 @@ Function DockerBinding {
         'cs' { docker container start $Params }
         # remove container
         'cr' { docker container rm $Params }
-
         # list images
         'i' { docker image ls $Params }
-        # tag image
-        'it' { docker image tag $Params }
         # remove image
         'ir' { docker image rm $Params }
-
+        # tag image
+        'it' { docker image tag $Params }
         # kill containers
         'k' { docker kill $Params }
         # fetch logs
         'l' { docker logs $Params }
-
-        # run
-        'r' { docker run $Params }
-        
-        # build
-        'b' { docker build $Params }
-        # push
-        'p' { docker push $Params }
-
         # login
         'li' { docker login $Params }
         # logout
         'lo' { docker logout $Params }
+        # run
+        'r' { docker run $Params }
+        # push
+        'p' { docker push $Params }
     }
 }
 
@@ -62,34 +57,34 @@ Function GitBinding {
 
     Switch ($Cmd) 
     {
-        # status
-        's' { git status $Params }
-        # tag
-        't' { git tag $Params }
+        # add
+        'a' { git add $Params }
+        # branch
+        'b' { git branch $Params }
         # checkout
         'c' { git checkout $Params }
-        # commit
-        'co' { git commit $Params }
         # clone repo
         'cl' { git clone $Params }
-        # reset changes
-        'rs' { git reset $Params }
+        # commit
+        'co' { git commit $Params }
+        # fetch
+        'f' { git fetch $Params }
+        # init 
+        'i' { git init $Params }
         # merge
         'm' { git merge $Params }
         # push
         'ps' { git push $Params }
         # pull
         'pl' { git pull $Params }
-        # init 
-        'i' { git init $Params }
-        # branch
-        'b' { git branch $Params }
         # rebase 
         'r' { git rebase $Params }
-        # fetch
-        'f' { git fetch $Params }
-        # add
-        'a' { git add $Params }
+        # reset changes
+        'rs' { git reset $Params }
+        # status
+        's' { git status $Params }
+        # tag
+        't' { git tag $Params }
     }
 }
 
