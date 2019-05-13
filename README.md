@@ -46,7 +46,8 @@ All aliases for Git begin with `g`.
 | ---      | ---
 | g s      | git status
 | g t      | git tag
-| g c      | git commit
+| g c      | git checkout
+| g co     | git commit
 | g cl     | git clone
 | g r      | git reset
 | g m      | git merge
