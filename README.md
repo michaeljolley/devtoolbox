@@ -54,6 +54,12 @@ All aliases for Git begin with `g`.
 | g ps     | git push
 
 
+### Miscellaneous
+
+| Command  | Executes
+| ---      | ---
+| reload   | Reloads the PowerShell console
+| hosts    | Opens the hosts file in VS Code
 
 ## Contributors
 
