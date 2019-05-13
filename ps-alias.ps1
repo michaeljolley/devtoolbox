@@ -1,4 +1,4 @@
-Function Docker-Binding {
+Function global:DockerBinding {
 
     Param(
         [Parameter(Mandatory = $true, Position = 0)]
@@ -37,7 +37,7 @@ Function Docker-Binding {
     }
 }
 
-Function Git-Binding {
+Function global:GitBinding {
 
     Param(
         [Parameter(Mandatory = $true, Position = 0)]
@@ -71,6 +71,6 @@ Function Git-Binding {
     }
 }
 
-New-Alias d Docker-Binding
-New-Alias g GitHub-Binding
+New-Alias d global:DockerBinding
+New-Alias g global:GitBinding
 
