@@ -1,16 +1,16 @@
-Function DockerBinding {
+function DockerBinding {
 
     Param(
         [Parameter(Mandatory = $true, Position = 0)]
         [String]
         $Cmd,
-          
+
         [Parameter(Mandatory = $false, ValueFromRemainingArguments = $true)]
         [String[]]
         $Params
     )
 
-    Switch ($Cmd) 
+    Switch ($Cmd)
     {
         # build
         'b' { docker build $Params }
@@ -43,19 +43,19 @@ Function DockerBinding {
     }
 }
 
-Function GitBinding {
+function GitBinding {
 
     Param(
         [Parameter(Mandatory = $true, Position = 0)]
         [String]
         $Cmd,
-          
+
         [Parameter(Mandatory = $false, ValueFromRemainingArguments = $true)]
         [String[]]
         $Params
     )
 
-    Switch ($Cmd) 
+    Switch ($Cmd)
     {
         # add
         'a' { git add $Params }
@@ -69,15 +69,19 @@ Function GitBinding {
         'co' { git commit $Params }
         # fetch
         'f' { git fetch $Params }
-        # init 
+        # init
         'i' { git init $Params }
+        # log
+        'l' { git log $Params }
+        # pretty log
+        'll' { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit }
         # merge
         'm' { git merge $Params }
         # pull
         'pl' { git pull $Params }
         # push
         'ps' { git push $Params }
-        # rebase 
+        # rebase
         'r' { git rebase $Params }
         # reset changes
         'rs' { git reset $Params }
@@ -86,6 +90,40 @@ Function GitBinding {
         # tag
         't' { git tag $Params }
     }
+}
+
+# A wrapper for Get-Command with the -Syntax parameter but can print the syntax down the screen.
+function Syntax {
+    [CmdletBinding()]
+    param (
+        $Command,
+
+        [switch]
+        $PrettySyntax
+    )
+
+    $check = Get-Command -Name $Command
+
+    $params = @{
+        Name =  if ($check.CommandType -eq 'Alias') {
+                    Get-Command -Name $check.Definition
+                }
+                else {
+                    $Command
+                }
+        Syntax = $true
+    }
+    if ($PrettySyntax) {
+        (Get-Command @params) -replace '(\s(?=\[)|\s(?=-))', "`r`n "
+    }
+    else {
+        Get-Command @params
+    }
+}
+
+function Sort-Reverse {
+    $rank = [int]::MaxValue
+    $input | Sort-Object {(--(Get-Variable rank -Scope 1).Value)}
 }
 
 # Opens the Windows hosts file in VS code.
