@@ -1,4 +1,4 @@
-Function global:DockerBinding {
+Function DockerBinding {
 
     Param(
         [Parameter(Mandatory = $true, Position = 0)]
@@ -21,7 +21,6 @@ Function global:DockerBinding {
         # remove container
         'cr' { docker container rm $Params }
 
-        
         # list images
         'i' { docker image ls $Params }
         # tag image
@@ -42,7 +41,6 @@ Function global:DockerBinding {
         # push
         'p' { docker push $Params }
 
-
         # login
         'li' { docker login $Params }
         # logout
@@ -50,7 +48,7 @@ Function global:DockerBinding {
     }
 }
 
-Function global:GitBinding {
+Function GitBinding {
 
     Param(
         [Parameter(Mandatory = $true, Position = 0)]
@@ -90,6 +88,8 @@ Function global:GitBinding {
         'r' { git rebase $Params }
         # fetch
         'f' { git fetch $Params }
+        # add
+        'a' { git add $Params }
     }
 }
 
@@ -125,5 +125,5 @@ if ($host.Name -eq 'ConsoleHost') {
 # END POWERSHELL RELOAD
 
 Set-Alias -Name 'reload' -Value 'Restart-PowerShell'
-New-Alias d global:DockerBinding
-New-Alias g global:GitBinding
+Set-Alias d DockerBinding
+Set-Alias g GitBinding
