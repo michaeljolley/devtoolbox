@@ -53,17 +53,6 @@ All aliases for Git begin with `g`.
 | g pl     | git pull
 | g ps     | git push
 
-### PowerShell
-
-| Command | Executes
-| ---     | ---
-| reload  | Restarts PowerShell in-place
-
-### Web Development
-| Command | Executes
-| ---     | ---
-| hosts   | Opens the Windows `hosts` file in VS Code (Requires VS Code to be installed and available as `code` in PowerShell)
-
 ### Miscellaneous
 
 | Command  | Executes
