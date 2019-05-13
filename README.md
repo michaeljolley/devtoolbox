@@ -27,14 +27,19 @@ All aliases for Docker begin with `d`.
 
 | Command   | Executes
 | ---       | ---
+| d b       | docker build
 | d c       | docker container ps
+| d cr      | docker container rm
 | d cs      | docker container start
 | d cx      | docker container stop
-| d cr      | docker container rm
 | d i       | docker image ls
-| d it      | docker image tag
 | d ir      | docker image rm
-| d b       | docker build
+| d k       | docker kill
+| d l       | docker logs
+| d li      | docker login
+| d lo      | docker logout
+| d r       | docker run
+| d t       | docker image tag
 | d p       | docker push
 
 
@@ -42,17 +47,22 @@ All aliases for Docker begin with `d`.
 
 All aliases for Git begin with `g`.
 
-| Command  | Executes
-| ---      | ---
-| g s      | git status
-| g t      | git tag
-| g c      | git checkout
-| g co     | git commit
-| g cl     | git clone
-| g r      | git reset
-| g m      | git merge
-| g pl     | git pull
-| g ps     | git push
+| Command   | Executes
+| ---       | ---
+| g a       | git add
+| g b       | git branch
+| g c       | git checkout
+| g cl      | git clone
+| g co      | git commit
+| g f       | git fetch
+| g i       | git init
+| g m       | git merge
+| g pl      | git pull
+| g ps      | git push
+| g r       | git rebase
+| g rs      | git reset
+| g s       | git status
+| g t       | git tag
 
 ### Miscellaneous
 

@@ -16,18 +16,18 @@ Function DockerBinding {
         'b' { docker build $Params }
         # list containers
         'c' { docker container ps $Params }
-        # stop container
-        'cx' { docker container stop $Params }
-        # start container
-        'cs' { docker container start $Params }
         # remove container
         'cr' { docker container rm $Params }
+        # start container
+        'cs' { docker container start $Params }
+        # stop container
+        'cx' { docker container stop $Params }
         # list images
         'i' { docker image ls $Params }
         # remove image
         'ir' { docker image rm $Params }
         # tag image
-        'it' { docker image tag $Params }
+        't' { docker image tag $Params }
         # kill containers
         'k' { docker kill $Params }
         # fetch logs
@@ -73,10 +73,10 @@ Function GitBinding {
         'i' { git init $Params }
         # merge
         'm' { git merge $Params }
-        # push
-        'ps' { git push $Params }
         # pull
         'pl' { git pull $Params }
+        # push
+        'ps' { git push $Params }
         # rebase 
         'r' { git rebase $Params }
         # reset changes
