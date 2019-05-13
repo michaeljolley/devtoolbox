@@ -68,7 +68,7 @@ All aliases for Git begin with `g`.
 
 | Command  | Executes
 | ---      | ---
-| reload   | Reloads the PowerShell console
+| reload   | Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.
 | hosts    | Opens the hosts file in VS Code
 
 ## Contributors
