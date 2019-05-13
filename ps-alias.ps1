@@ -78,8 +78,7 @@ function hosts {
 
 # BEGIN POWERSHELL RELOAD
 # Powershell reload is based on code from this article by Øyvind Kallstad. -> https://communary.net/2015/05/28/how-to-reload-the-powershell-console-session/
-# It reloads powershell in the event you have added something to the path or user provile script and needs a 
-# powershell restart in order for it to be recognized.
+# Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.
 function Invoke-PowerShell {
     powershell -nologo
     Invoke-PowerShell
