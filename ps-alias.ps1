@@ -113,11 +113,11 @@ function Syntax {
                 }
         Syntax = $true
     }
-    if ($PrettySyntax) {
-        (Get-Command @params) -replace '(\s(?=\[)|\s(?=-))', "`r`n "
+    if ($Normalise) {
+        Get-Command @params
     }
     else {
-        Get-Command @params
+        (Get-Command @params) -replace '(\s(?=\[)|\s(?=-))', "`r`n "
     }
 }
 
@@ -175,7 +175,7 @@ function Restart-PSHost {
         if ($host.Name -eq 'Windows PowerShell ISE Host' -and $psISE.PowerShellTabs.Files.IsSaved -contains $false) {
             if ($Force -or $PSCmdlet.ShouldProcess('Unsaved work detected?','Unsaved work detected. Save changes?','Confirm')) {
                 foreach ($IseTab in $psISE.PowerShellTabs) {
-                    $IseTab.Files | ForEach-Object { 
+                    $IseTab.Files | ForEach-Object {
                         if ($_.IsUntitled -and !$_.IsSaved) {
                             $_.SaveAs($_.FullPath,[System.Text.Encoding]::UTF8)
                         }
