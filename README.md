@@ -70,6 +70,10 @@ All aliases for Git begin with `g`.
 | ---      | ---
 | reload   | Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.
 | hosts    | Opens the hosts file in VS Code
+| Syntax   | Prints PowerShell Command Syntax vertically, replicating docs.microsoft.com layout
+| Sort-Reverse   | Reverses the order of an array. Accepts pipeline support e.g. `1,2,3,4,5 | Sort-Reverse`
+
+
 
 ## Contributors
 
