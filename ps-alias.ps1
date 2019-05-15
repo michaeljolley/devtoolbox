@@ -99,7 +99,8 @@ function Syntax {
         $Command,
 
         [switch]
-        $PrettySyntax
+        [Parameter(Alias = 'Normalize')]
+        $Normalise
     )
 
     $check = Get-Command -Name $Command
