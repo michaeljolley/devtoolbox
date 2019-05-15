@@ -96,10 +96,11 @@ function GitBinding {
 function Syntax {
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory)]
         $Command,
 
         [switch]
-        [Parameter(Alias = 'Normalize')]
+        [Alias('Normalize','Horizontal')]
         $Normalise
     )
 
