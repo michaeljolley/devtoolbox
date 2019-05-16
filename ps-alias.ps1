@@ -96,10 +96,12 @@ function GitBinding {
 function Syntax {
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory)]
         $Command,
 
         [switch]
-        $PrettySyntax
+        [Alias('Normalize','Horizontal')]
+        $Normalise
     )
 
     $check = Get-Command -Name $Command
