@@ -1,6 +1,8 @@
 # PowerShell Alias
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
 
+For more information as to how this repo came about, check out this [blog post](https://michaeljolley.com/posts/setup-command-aliases-in-powershell-to-make-life-easier/)
+
 PowerShell scripts that enables shorthand for common commands for Docker, Git, and more.
 
 <p align="center">
