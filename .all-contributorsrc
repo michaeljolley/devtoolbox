@@ -47,6 +47,16 @@
         "ideas",
         "doc"
       ]
+    },
+    {
+      "login": "corbob",
+      "name": "corbob",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/30301021?v=4",
+      "profile": "https://github.com/corbob",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
