@@ -1,4 +1,5 @@
-function DockerBinding {
+function Invoke-DockerBinding {
+    [Alias('d')]
 
     Param(
         [Parameter(Mandatory = $true, Position = 0)]
@@ -43,8 +44,8 @@ function DockerBinding {
     }
 }
 
-function GitBinding {
-
+function Invoke-GitBinding {
+    [Alias('g')]
     Param(
         [Parameter(Mandatory = $true, Position = 0)]
         [String]
@@ -93,8 +94,9 @@ function GitBinding {
 }
 
 # A wrapper for Get-Command with the -Syntax parameter but can print the syntax down the screen.
-function Syntax {
+function Get-Syntax {
     [CmdletBinding()]
+    [Alias('Syntax')]
     param (
         [Parameter(Mandatory)]
         $Command,
@@ -124,6 +126,7 @@ function Syntax {
 }
 
 function Sort-Reverse {
+    # Sort is not an approved verb... Not sure of better one that is an approved verb. Will just leave this comment with link for future reference: https://github.com/PowerShell/PowerShell/issues/3370
     $rank = [int]::MaxValue
     $input | Sort-Object {(--(Get-Variable rank -Scope 1).Value)}
 }
@@ -211,5 +214,3 @@ if ($host.Name -eq 'ConsoleHost') {
 # END POWERSHELL RELOAD
 
 Set-Alias -Name 'reload' -Value 'Restart-PowerShell'
-Set-Alias d DockerBinding
-Set-Alias g GitBinding
