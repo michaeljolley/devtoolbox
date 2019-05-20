@@ -17,5 +17,6 @@ some changes or improvements or alternatives.
 
 Some things that will increase the chance that your pull request is accepted:
 
-* Write tests.
+* Update [README](README.md) with any needed changes
+* Update [CHANGELOG](CHANGELOG.md) with any changes
 * Write a [good commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
