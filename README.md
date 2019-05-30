@@ -43,6 +43,7 @@ All aliases for Docker begin with `d`.
 | d r       | docker run
 | d t       | docker image tag
 | d p       | docker push
+| d ...     | docker ... (where ... is any parameter you use)
 
 
 ### Git
@@ -65,6 +66,7 @@ All aliases for Git begin with `g`.
 | g rs      | git reset
 | g s       | git status
 | g t       | git tag
+| g ...     | git ... (where ... is any parameter you use)
 
 ### Miscellaneous
 
