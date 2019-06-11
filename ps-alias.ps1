@@ -1,17 +1,52 @@
+function Get-DockerImages {
+  param([switch]$a)
+  if ($a) {
+    $images = (docker image ls -a).Split("`n")
+  }
+  else {
+    $images = (docker image ls).Split("`n")
+  }
+  $titles = [regex]::Split($images[0], "\s{2,}") | Where-Object { -not [string]::IsNullOrEmpty($_) }
+  $rows = $images | Select-Object -Skip 1
+  $infos = @()
+  $rows | ForEach-Object {
+    $columns = [regex]::Split($_, "\s{2,}") | Where-Object { -not [string]::IsNullOrEmpty($_) }
+    $obj = New-Object PSCustomObject
+    for ($i = 0; $i -lt $titles.Count; $i++) {
+      $obj | Add-Member -MemberType NoteProperty -Name $titles[$i] -Value $columns[$i]
+    }
+    $infos += $obj
+  }
+  return $infos
+}
+
+function Get-DockerCommands {
+  param(
+    [string]$Command
+  )
+  $help = $(if ($Command) { docker $Command --help } else { docker --help }) | Select-String -Pattern "^\s{2}\w+"
+  $cmds = @()
+  for ($i = 0; $i -lt $help.Count; $i++) {
+    $cmdline = $help[$i].Line.Trim()
+    $cmds += $cmdline.Substring(0, $cmdline.IndexOf(" "))
+  }
+  return $cmds
+}
+
 function Invoke-DockerBinding {
     [Alias('d')]
 
     Param(
         [Parameter(Mandatory = $true, Position = 0)]
         [String]
-        $Cmd,
+        $Command,
 
         [Parameter(Mandatory = $false, ValueFromRemainingArguments = $true)]
         [String[]]
         $Params
     )
 
-    Switch ($Cmd)
+    Switch ($Command)
     {
         # build
         'b' { docker build $Params }
@@ -41,7 +76,50 @@ function Invoke-DockerBinding {
         'r' { docker run $Params }
         # push
         'p' { docker push $Params }
+        # catchall
+        default { docker $Command $Params }
     }
+}
+
+Register-ArgumentCompleter -CommandName Invoke-DockerBinding -ParameterName Command -ScriptBlock {
+  param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
+  $cmds = Get-DockerCommands
+  if ($wordToComplete) {
+    $cmds | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object { $_ }
+  }
+  else {
+    $cmds | ForEach-Object { $_ }
+  }
+}
+
+Register-ArgumentCompleter -CommandName Invoke-DockerBinding -ParameterName Params -ScriptBlock {
+  param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
+  $cmd = $fakeBoundParameters["Command"]
+  $ast = $commandAst.CommandElements | Where-Object Value -EQ $cmd
+  $subcmdidx = $commandAst.CommandElements.IndexOf($ast)
+  $subcmd = $commandAst.CommandElements[$subcmdidx + 1].Value
+
+  # Tab complete available sub-commands
+  if ((-not $subcmd -or $subcmd -eq $wordToComplete) -and (Get-DockerCommands) -contains $cmd) {
+    $commands = Get-DockerCommands $cmd
+    if ($wordToComplete) {
+      $commands | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object {$_}
+    }
+    else {
+      $commands | ForEach-Object {$_}
+    }
+    return
+  }
+  
+  # Tab complete the docker image name:tag
+  switch ($cmd) {    
+    {$_ -eq 'ir' -or $_ -eq 'rmi' -or ($_ -eq 'image' -and ($subcmd -ne "ls" -and $subcmd -ne "build" -and $subcmd -ne "import"))} {
+      $images = Get-DockerImages | Select-Object @{Name="RepoTag";Expression={$_.REPOSITORY+":"+$_.TAG}}
+      $options = @()
+      $options += $images | Select-Object -ExpandProperty RepoTag
+      $options | ForEach-Object {$_}
+    }
+  }
 }
 
 function Invoke-GitBinding {
