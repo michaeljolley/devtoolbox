@@ -1,26 +1,33 @@
-function Get-DockerImages {
-  param([switch]$a)
+# Utiltity Funcitons
+Function Get-DockerImages {
+  param(
+    [switch]$a
+  )
+  
+  $params = @()
+  $params += "image","ls"
   if ($a) {
-    $images = (docker image ls -a).Split("`n")
+    $params += "-a"
   }
-  else {
-    $images = (docker image ls).Split("`n")
-  }
-  $titles = [regex]::Split($images[0], "\s{2,}") | Where-Object { -not [string]::IsNullOrEmpty($_) }
-  $rows = $images | Select-Object -Skip 1
+
+  $images = docker @params
+
+  $titles = [regex]::Split($images[0], "\s{2,}") | ForEach-Object { return (Get-Culture).TextInfo.ToTitleCase($_.ToLower()) }
+
   $infos = @()
-  $rows | ForEach-Object {
+  $images | Select-Object -Skip 1 | ForEach-Object {
     $columns = [regex]::Split($_, "\s{2,}") | Where-Object { -not [string]::IsNullOrEmpty($_) }
-    $obj = New-Object PSCustomObject
+    $info = New-Object PSCustomObject
     for ($i = 0; $i -lt $titles.Count; $i++) {
-      $obj | Add-Member -MemberType NoteProperty -Name $titles[$i] -Value $columns[$i]
+      
+      $info | Add-Member -MemberType NoteProperty -Name $titles[$i].Replace(" ", "") -Value $columns[$i]
     }
-    $infos += $obj
+    $infos += $info
   }
+
   return $infos
 }
-
-function Get-DockerCommands {
+Function Get-DockerCommands {
   param(
     [string]$Command
   )
@@ -32,11 +39,10 @@ function Get-DockerCommands {
   }
   return $cmds
 }
-
-function Get-DockerContainers {
+Function Get-DockerContainers {
   param([switch]$a)
   $params = @()
-  $params += "container", "ls"
+  $params += "container","ls"
   if ($a) { $params += "-a" }
 
   $containers = docker @params
@@ -49,7 +55,7 @@ function Get-DockerContainers {
     for ($i = 0; $i -lt $titles.Count; $i++) {
       $r = $_
       $columnStartIndex = ($containers | Select-String -Pattern "$($titles[$i])").Matches.Index
-      $columnEndIndex = $(if (($i + 1) -lt $titles.Count) { ($containers | Select-String -Pattern "$($titles[$i+1])").Matches.Index } else { $r.Length })
+      $columnEndIndex = $(if (($i+1) -lt $titles.Count) { ($containers | Select-String -Pattern "$($titles[$i+1])").Matches.Index } else { $r.Length })
       $column = $r.Substring($columnStartIndex, $columnEndIndex - $columnStartIndex).Trim()
       $info | Add-Member -MemberType NoteProperty -Name $titles[$i].Replace(" ", "") -Value $column
     }
@@ -58,6 +64,36 @@ function Get-DockerContainers {
 
   return $infos
 }
+Function Get-DockerComposeCommands {
+  param(
+    [string]$Command
+  )
+  $help = $(if ($Command) { docker-compose $Command --help } else { docker-compose --help }) | Select-String -Pattern "^\s{2}\w+" | Where-Object { $_ -notlike "*docker-compose*" }
+  $cmds = @()
+  for ($i = 0; $i -lt $help.Count; $i++) {
+    $cmdline = $help[$i].Line.Trim()
+    $cmds += $cmdline.Substring(0, $cmdline.IndexOf(" "))
+  }
+  return $cmds
+}
+Function Get-DockerComposeServices {
+  param
+  (
+    [Parameter(Mandatory = $true)]
+    [string]$Path
+  )
+  if (-not (Test-Path $Path)) {
+    throw
+  }
+  $file = Get-Content (Convert-Path $Path)
+  $categories = $file | Select-String -Pattern "^\w+:"
+  $service = $categories | Where-Object {$_.Line -like "services:*"}
+  $serviceIdx = $categories.IndexOf($service)
+  $startLine = ($categories[$serviceIdx] | Select-Object -ExpandProperty LineNumber)
+  $endLine = $(if ($serviceIdx -lt $categories.Length - 1) {$categories[$serviceIdx+1] | Select-Object -ExpandProperty LineNumber} else {$file.Count})
+  return $file | Select-Object -Skip $startLine -First ($endLine - $startLine) | Select-String -Pattern "^\s{2}\w+:" | Select-Object @{Name="Service";Expression={$_.Line.Trim().Replace(":","")}} | Sort-Object -Property Service
+}
+# End Utility Functions
 
 function Invoke-DockerBinding {
   [Alias('d')]
@@ -109,12 +145,7 @@ function Invoke-DockerBinding {
 Register-ArgumentCompleter -CommandName Invoke-DockerBinding -ParameterName Command -ScriptBlock {
   param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
   $cmds = Get-DockerCommands
-  if ($wordToComplete) {
-    $cmds | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object { $_ }
-  }
-  else {
-    $cmds | ForEach-Object { $_ }
-  }
+  return $(if ($wordToComplete) { $cmds | Where-Object { $_ -like "$wordToComplete*" } } else { $cmds })
 }
 
 Register-ArgumentCompleter -CommandName Invoke-DockerBinding -ParameterName Params -ScriptBlock {
@@ -130,15 +161,17 @@ Register-ArgumentCompleter -CommandName Invoke-DockerBinding -ParameterName Para
     if ($results) { return $results }
   }
 
-  if ($cmd -eq "container" -or $cmd -eq "cr") {
+  if ($cmd -eq "container" -or $cmd -eq "rmc") {
     $containers = Get-DockerContainers -a | Select-Object -ExpandProperty Names
     return $containers
   }
 
   if ($subcmd -ne "ls" -or $subcmd -ne "build" -or $subcmd -ne "import") {
-    $images = Get-DockerImages -a | Select-Object @{Name = "RepoTag"; Expression = { $_.Repository + ":" + $_.Tag } }
+    $images = Get-DockerImages -a | Select-Object ImageId, @{Name="RepoTag";Expression={$_.Repository+":"+$_.Tag}}
     $options = @()
-    $options += $images | Select-Object -ExpandProperty RepoTag
+    $options += $images | Where-Object {$_.RepoTag -ne "<none>:<none>"} | Select-Object -ExpandProperty RepoTag
+    $options += $images | Where-Object {$_.RepoTag -eq "<none>:<none>"} | Select-Object -ExpandProperty ImageId
+    $options = $options | Where-Object {-not ($commandAst.CommandElements | Select-Object -ExpandProperty Value).Contains($_)}
     return $options
   }
 }
