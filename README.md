@@ -43,6 +43,7 @@ All aliases for Docker begin with `d`.
 | d r       | docker run
 | d t       | docker image tag
 | d p       | docker push
+| d ...     | docker ... (where ... is any parameter you use)
 
 
 ### Git
@@ -65,6 +66,7 @@ All aliases for Git begin with `g`.
 | g rs      | git reset
 | g s       | git status
 | g t       | git tag
+| g ...     | git ... (where ... is any parameter you use)
 
 ### Miscellaneous
 
@@ -74,6 +76,7 @@ All aliases for Git begin with `g`.
 | hosts    | Opens the hosts file in VS Code
 | Syntax   | Prints PowerShell Command Syntax vertically, replicating docs.microsoft.com layout
 | Sort-Reverse   | Reverses the order of an array. Accepts pipeline support e.g. `1,2,3,4,5 | Sort-Reverse`
+| Restore-WorkspacePackages (rwp) | Restores NPM, Nuget, and Libman packages starting at the root folder of a workspace.
 
 
 ## Contributing
@@ -84,7 +87,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://michaeljolley.com/"><img src="https://avatars2.githubusercontent.com/u/1228996?v=4" width="100px;" alt="Michael Jolley"/><br /><sub><b>Michael Jolley</b></sub></a><br /><a href="https://github.com/MichaelJolley/ps-alias/commits?author=MichaelJolley" title="Code">💻</a> <a href="#ideas-MichaelJolley" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/MichaelJolley/ps-alias/commits?author=MichaelJolley" title="Documentation">📖</a></td><td align="center"><a href="http://ryanhayes.net"><img src="https://avatars3.githubusercontent.com/u/438357?v=4" width="100px;" alt="Ryan Hayes"/><br /><sub><b>Ryan Hayes</b></sub></a><br /><a href="https://github.com/MichaelJolley/ps-alias/commits?author=RyannosaurusRex" title="Code">💻</a> <a href="#ideas-RyannosaurusRex" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/MichaelJolley/ps-alias/commits?author=RyannosaurusRex" title="Documentation">📖</a></td><td align="center"><a href="https://github.com/parithon"><img src="https://avatars3.githubusercontent.com/u/8602418?v=4" width="100px;" alt="Anthony Conrad"/><br /><sub><b>Anthony Conrad</b></sub></a><br /><a href="https://github.com/MichaelJolley/ps-alias/commits?author=parithon" title="Code">💻</a> <a href="#ideas-parithon" title="Ideas, Planning, & Feedback">🤔</a></td><td align="center"><a href="https://millerb.co.uk"><img src="https://avatars0.githubusercontent.com/u/24279339?v=4" width="100px;" alt="Brett Miller"/><br /><sub><b>Brett Miller</b></sub></a><br /><a href="https://github.com/MichaelJolley/ps-alias/commits?author=brettmillerb" title="Code">💻</a> <a href="#ideas-brettmillerb" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/MichaelJolley/ps-alias/commits?author=brettmillerb" title="Documentation">📖</a></td><td align="center"><a href="https://github.com/corbob"><img src="https://avatars2.githubusercontent.com/u/30301021?v=4" width="100px;" alt="corbob"/><br /><sub><b>corbob</b></sub></a><br /><a href="#ideas-corbob" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/MichaelJolley/ps-alias/commits?author=corbob" title="Code">💻</a></td><td align="center"><a href="https://c-j.tech"><img src="https://avatars0.githubusercontent.com/u/3969086?v=4" width="100px;" alt="Chris Jones"/><br /><sub><b>Chris Jones</b></sub></a><br /><a href="https://github.com/MichaelJolley/ps-alias/commits?author=cmjchrisjones" title="Documentation">📖</a></td></tr></table>
+<table><tr><td align="center"><a href="https://michaeljolley.com/"><img src="https://avatars2.githubusercontent.com/u/1228996?v=4" width="100px;" alt="Michael Jolley"/><br /><sub><b>Michael Jolley</b></sub></a><br /><a href="https://github.com/MichaelJolley/ps-alias/commits?author=MichaelJolley" title="Code">💻</a> <a href="#ideas-MichaelJolley" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/MichaelJolley/ps-alias/commits?author=MichaelJolley" title="Documentation">📖</a></td><td align="center"><a href="http://ryanhayes.net"><img src="https://avatars3.githubusercontent.com/u/438357?v=4" width="100px;" alt="Ryan Hayes"/><br /><sub><b>Ryan Hayes</b></sub></a><br /><a href="https://github.com/MichaelJolley/ps-alias/commits?author=RyannosaurusRex" title="Code">💻</a> <a href="#ideas-RyannosaurusRex" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/MichaelJolley/ps-alias/commits?author=RyannosaurusRex" title="Documentation">📖</a></td><td align="center"><a href="https://github.com/parithon"><img src="https://avatars3.githubusercontent.com/u/8602418?v=4" width="100px;" alt="Anthony Conrad"/><br /><sub><b>Anthony Conrad</b></sub></a><br /><a href="https://github.com/MichaelJolley/ps-alias/commits?author=parithon" title="Code">💻</a> <a href="#ideas-parithon" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/MichaelJolley/ps-alias/commits?author=parithon" title="Documentation">📖</a></td><td align="center"><a href="https://millerb.co.uk"><img src="https://avatars0.githubusercontent.com/u/24279339?v=4" width="100px;" alt="Brett Miller"/><br /><sub><b>Brett Miller</b></sub></a><br /><a href="https://github.com/MichaelJolley/ps-alias/commits?author=brettmillerb" title="Code">💻</a> <a href="#ideas-brettmillerb" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/MichaelJolley/ps-alias/commits?author=brettmillerb" title="Documentation">📖</a></td><td align="center"><a href="https://github.com/corbob"><img src="https://avatars2.githubusercontent.com/u/30301021?v=4" width="100px;" alt="corbob"/><br /><sub><b>corbob</b></sub></a><br /><a href="#ideas-corbob" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/MichaelJolley/ps-alias/commits?author=corbob" title="Code">💻</a></td><td align="center"><a href="https://c-j.tech"><img src="https://avatars0.githubusercontent.com/u/3969086?v=4" width="100px;" alt="Chris Jones"/><br /><sub><b>Chris Jones</b></sub></a><br /><a href="https://github.com/MichaelJolley/ps-alias/commits?author=cmjchrisjones" title="Documentation">📖</a></td></tr></table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

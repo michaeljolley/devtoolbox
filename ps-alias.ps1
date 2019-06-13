@@ -1,4 +1,4 @@
-# Utiltity Funcitons
+# Utility Functions
 Function Get-DockerImages {
   param(
     [switch]$a
@@ -45,55 +45,108 @@ Function Get-DockerContainers {
   $params += "container","ls"
   if ($a) { $params += "-a" }
 
-  $containers = docker @params
+function Invoke-GitBinding {
+    [Alias('g')]
+    Param(
+        [Parameter(Mandatory = $true, Position = 0)]
+        [String]
+        $Cmd,
 
-  $titles = [regex]::Split($containers[0], "\s{2,}") | ForEach-Object { return (Get-Culture).TextInfo.ToTitleCase($_.ToLower()) }
+        [Parameter(Mandatory = $false, ValueFromRemainingArguments = $true)]
+        [String[]]
+        $Params
+    )
 
-  $infos = @()
-  $containers | Select-Object -Skip 1 | ForEach-Object {
-    $info = New-Object PSCustomObject
-    for ($i = 0; $i -lt $titles.Count; $i++) {
-      $r = $_
-      $columnStartIndex = ($containers | Select-String -Pattern "$($titles[$i])").Matches.Index
-      $columnEndIndex = $(if (($i+1) -lt $titles.Count) { ($containers | Select-String -Pattern "$($titles[$i+1])").Matches.Index } else { $r.Length })
-      $column = $r.Substring($columnStartIndex, $columnEndIndex - $columnStartIndex).Trim()
-      $info | Add-Member -MemberType NoteProperty -Name $titles[$i].Replace(" ", "") -Value $column
+    Switch ($Cmd)
+    {
+        # add
+        'a' { git add $Params }
+        # branch
+        'b' { git branch $Params }
+        # checkout
+        'c' { git checkout $Params }
+        # clone repo
+        'cl' { git clone $Params }
+        # commit
+        'co' { git commit $Params }
+        # fetch
+        'f' { git fetch $Params }
+        # init
+        'i' { git init $Params }
+        # log
+        'l' { git log $Params }
+        # pretty log
+        'll' { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit }
+        # merge
+        'm' { git merge $Params }
+        # pull
+        'pl' { git pull $Params }
+        # push
+        'ps' { git push $Params }
+        # rebase
+        'r' { git rebase $Params }
+        # reset changes
+        'rs' { git reset $Params }
+        # status
+        's' { git status $Params }
+        # tag
+        't' { git tag $Params }
+        # catchall
+        default { git $Cmd $Params }
     }
     $infos += $info
   }
 
   return $infos
 }
-Function Get-DockerComposeCommands {
-  param(
-    [string]$Command
-  )
-  $help = $(if ($Command) { docker-compose $Command --help } else { docker-compose --help }) | Select-String -Pattern "^\s{2}\w+" | Where-Object { $_ -notlike "*docker-compose*" }
-  $cmds = @()
-  for ($i = 0; $i -lt $help.Count; $i++) {
-    $cmdline = $help[$i].Line.Trim()
-    $cmds += $cmdline.Substring(0, $cmdline.IndexOf(" "))
-  }
-  return $cmds
-}
-Function Get-DockerComposeServices {
-  param
-  (
-    [Parameter(Mandatory = $true)]
-    [string]$Path
-  )
-  if (-not (Test-Path $Path)) {
-    throw
-  }
-  $file = Get-Content (Convert-Path $Path)
-  $categories = $file | Select-String -Pattern "^\w+:"
-  $service = $categories | Where-Object {$_.Line -like "services:*"}
-  $serviceIdx = $categories.IndexOf($service)
-  $startLine = ($categories[$serviceIdx] | Select-Object -ExpandProperty LineNumber)
-  $endLine = $(if ($serviceIdx -lt $categories.Length - 1) {$categories[$serviceIdx+1] | Select-Object -ExpandProperty LineNumber} else {$file.Count})
-  return $file | Select-Object -Skip $startLine -First ($endLine - $startLine) | Select-String -Pattern "^\s{2}\w+:" | Select-Object @{Name="Service";Expression={$_.Line.Trim().Replace(":","")}} | Sort-Object -Property Service
-}
 # End Utility Functions
+
+function Restore-WorkspacePackages {
+  [Alias('rwp')]
+  [CmdletBinding(DefaultParameterSetName="Default")]
+  param(
+      [Parameter(ParameterSetName="NPM", HelpMessage="Restore only NPM packages")]
+      [switch]$NPM,
+      [Parameter(ParameterSetName="Nuget", HelpMessage="Restore only Nuget packages")]
+      [switch]$Nuget,
+      [Parameter(ParameterSetName="Libman", HelpMessage="Restore only Library Manager packages")]
+      [switch]$Libman
+  )
+
+  $restoreNpm = -not ($null -eq (Get-Command npm -ErrorAction SilentlyContinue))
+  $restoreDotnet = -not ($null -eq (Get-Command dotnet -ErrorAction SilentlyContinue))
+  $restoreLibman = -not ($null -eq (Get-Command libman -ErrorAction SilentlyContinue))
+
+  if ($restoreNpm -and ($PSCmdlet.ParameterSetName -eq "Default" -or $PSCmdlet.ParameterSetName -eq "NPM")) {
+      Write-Host "Restoring NPM packages"
+      Get-ChildItem -Filter package.json -Recurse | Where-Object Directory -NotLike "*node_module*" | ForEach-Object {
+          Write-Host "-  Restoring $($_.Directory)..." -ForegroundColor Yellow
+          Push-Location $_.Directory
+          npm install --no-save
+          Pop-Location
+      }
+  }
+
+  if ($restoreDotnet -and ($PSCmdlet.ParameterSetName -eq "Default" -or $PSCmdlet.ParameterSetName -eq "Nuget")) {
+      Write-Host "Restoring NuGet packages"
+      Get-ChildItem -Filter *.*proj -Recurse | ForEach-Object {
+          Write-Host "-  Restoring $($_.Directory)..." -ForegroundColor Yellow
+          Push-Location $_.Directory
+          dotnet restore
+          Pop-Location
+      }
+  }
+
+  if ($restoreLibman -and ($PSCmdlet.ParameterSetName -eq "Default" -or $PSCmdlet.ParameterSetName -eq "Libman")) {
+      Write-Host "Restoring Libman packages"
+      Get-ChildItem -Filter libman.json -Recurse | ForEach-Object {
+          Write-Host "-  Restoring $($_.Directory)..." -ForegroundColor Yellow
+          Push-Location $_.Directory
+          libman restore
+          Pop-Location
+      }
+  }
+}
 
 function Invoke-DockerBinding {
   [Alias('d')]
