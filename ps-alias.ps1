@@ -41,6 +41,8 @@ function Invoke-DockerBinding {
         'r' { docker run $Params }
         # push
         'p' { docker push $Params }
+        # catchall
+        default { docker $Cmd $Params }
     }
 }
 
@@ -90,6 +92,8 @@ function Invoke-GitBinding {
         's' { git status $Params }
         # tag
         't' { git tag $Params }
+        # catchall
+        default { git $Cmd $Params }
     }
 }
 
