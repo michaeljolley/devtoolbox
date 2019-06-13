@@ -1,3 +1,53 @@
+<#
+ .Synopsis
+  Adds custom alias for git and docker and the following commands 
+ .Description
+  PowerShell scripts that enables shorthand for common commands for Docker, Git, and more.
+ 
+ .Example
+    All aliases accept parameters of the commands they call.
+    For example, the below are identical:
+    g cl https://github.com/MichaelJolley/ps-alias.git
+    git clone https://github.com/MichaelJolley/ps-alias.git
+    Docker
+    Command  Executes
+    d b	 == docker build
+    d c	 == docker container ps
+    d cr ==	docker container rm
+    d cs ==	docker container start
+    d cx ==	docker container stop
+    d i  == docker image ls
+    d ir ==	docker image rm
+    d k  == docker kill
+    d l	 == docker logs
+    d li ==	docker login
+    d lo == docker logout
+    d r	 == docker run
+    d t	 == docker image tag
+    d p	 == docker push
+    Git
+    Command  Executes
+    g a  == git add
+    g b	 == git branch
+    g c	 == git checkout
+    g cl ==	git clone
+    g co ==	git commit
+    g f	 == git fetch
+    g i	 == git init
+    g m	 == git merge
+    g pl ==	git pull
+    g ps ==	git push
+    g r  ==	git rebase
+    g rs ==	git reset
+    g s	 == git status
+    g t == git tag
+    Misceleaneous
+    reload        Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.
+    hosts	      Opens the hosts file in VS Code
+    Syntax	      Prints PowerShell Command Syntax vertically, replicating docs.microsoft.com layout
+    Sort-Reverse  Reverses the order of an array. Accepts pipeline support e.g. `1,2,3,4,5
+#>
+
 function Invoke-DockerBinding {
     [Alias('d')]
 
@@ -127,7 +177,7 @@ function Get-Syntax {
 
 function Sort-Reverse {
     # Sort is not an approved verb... Not sure of better one that is an approved verb. Will just leave this comment with link for future reference: https://github.com/PowerShell/PowerShell/issues/3370
-    $rank = [int]::MaxValue
+    $rank = [int]::MaxValue # this is never used?
     $input | Sort-Object {(--(Get-Variable rank -Scope 1).Value)}
 }
 
@@ -219,8 +269,8 @@ function Restart-PSHost {
 }
 
 # This code breaks the powershell reload infinite loop, so it's not calling itself forever.
-$parentProcessId = (Get-WmiObject Win32_Process -Filter "ProcessId=$PID").ParentProcessId
-$parentProcessName = (Get-WmiObject Win32_Process -Filter "ProcessId=$parentProcessId").ProcessName
+#Fix for pwsh
+$parentProcessName = (get-process -Id $PID).ProcessName
 
 if ($host.Name -eq 'ConsoleHost') {
     if (-not($parentProcessName -eq 'powershell.exe')) {
