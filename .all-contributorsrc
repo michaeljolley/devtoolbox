@@ -67,6 +67,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "RamblingGeekUK",
+      "name": "Wayne Taylor",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7108949?v=4",
+      "profile": "https://www.ramblinggeek.co.uk",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
