@@ -76,6 +76,7 @@ All aliases for Git begin with `g`.
 | hosts    | Opens the hosts file in VS Code
 | Syntax   | Prints PowerShell Command Syntax vertically, replicating docs.microsoft.com layout
 | Sort-Reverse   | Reverses the order of an array. Accepts pipeline support e.g. `1,2,3,4,5 | Sort-Reverse`
+| Restore-WorkspacePackages (rwp) | Restores NPM, Nuget, and Libman packages starting at the root folder of a workspace.
 
 
 ## Contributing
