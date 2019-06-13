@@ -43,6 +43,7 @@ All aliases for Docker begin with `d`.
 | d r       | docker run
 | d t       | docker image tag
 | d p       | docker push
+| d ...     | docker ... (where ... is any parameter you use)
 
 
 ### Git
@@ -65,6 +66,7 @@ All aliases for Git begin with `g`.
 | g rs      | git reset
 | g s       | git status
 | g t       | git tag
+| g ...     | git ... (where ... is any parameter you use)
 
 ### Miscellaneous
 
@@ -74,6 +76,7 @@ All aliases for Git begin with `g`.
 | hosts    | Opens the hosts file in VS Code
 | Syntax   | Prints PowerShell Command Syntax vertically, replicating docs.microsoft.com layout
 | Sort-Reverse   | Reverses the order of an array. Accepts pipeline support e.g. `1,2,3,4,5 | Sort-Reverse`
+| Restore-WorkspacePackages (rwp) | Restores NPM, Nuget, and Libman packages starting at the root folder of a workspace.
 
 
 ## Contributing
