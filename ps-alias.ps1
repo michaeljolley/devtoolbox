@@ -3,7 +3,7 @@ Function Get-DockerImages {
   param(
     [switch]$a
   )
-  
+
   $params = @()
   $params += "image","ls"
   if ($a) {
@@ -19,7 +19,7 @@ Function Get-DockerImages {
     $columns = [regex]::Split($_, "\s{2,}") | Where-Object { -not [string]::IsNullOrEmpty($_) }
     $info = New-Object PSCustomObject
     for ($i = 0; $i -lt $titles.Count; $i++) {
-      
+
       $info | Add-Member -MemberType NoteProperty -Name $titles[$i].Replace(" ", "") -Value $columns[$i]
     }
     $infos += $info
@@ -229,6 +229,23 @@ Register-ArgumentCompleter -CommandName Invoke-DockerBinding -ParameterName Para
   }
 }
 
+
+function Invoke-GitHubRepository {
+  [Alias('gh')]
+  Param()
+
+  $GitURL = (git config remote.origin.url)
+
+  if ($null -ne $GitURL -and
+      $GitURL.Substring(0, 4).ToLower() -eq "http" -and
+      $GitURL.ToLower().Contains("github")) {
+    Start-Process -FilePath $GitURL
+  }
+  else {
+    Write-Host "Directory not tracked by GitHub"
+  }
+}
+
 function Invoke-GitBinding {
   [Alias('g')]
   Param(
@@ -320,7 +337,7 @@ function Edit-HostsFile {
   [Alias('hosts')]
   [CmdletBinding()]
   Param()
-  # TO CONSIDER: Should we take a 
+  # TO CONSIDER: Should we take a
   # Make sure we're on Windows...
   if ($PSVersionTable.PSVersion.Major -lt 6 -or $IsWindows) {
     # Default editor to notepad.exe
