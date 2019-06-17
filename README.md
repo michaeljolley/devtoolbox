@@ -1,5 +1,5 @@
 # PowerShell Alias
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributing)
 
 For more information as to how this repo came about, check out this [blog post](https://michaeljolley.com/posts/setup-command-aliases-in-powershell-to-make-life-easier/)
 
