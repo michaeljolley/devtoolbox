@@ -11,7 +11,7 @@ PowerShell scripts that enables shorthand for common commands for Docker, Git, a
 
 ## Parameters
 
-All aliases accept parameters of the commands they call.  
+All aliases accept parameters of the commands they call.
 
 For example, the below are identical:
 
@@ -70,13 +70,14 @@ All aliases for Git begin with `g`.
 
 ### Miscellaneous
 
-| Command  | Executes
-| ---      | ---
-| reload   | Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.
-| hosts    | Opens the hosts file in VS Code
-| Syntax   | Prints PowerShell Command Syntax vertically, replicating docs.microsoft.com layout
-| Sort-Reverse   | Reverses the order of an array. Accepts pipeline support e.g. `1,2,3,4,5 | Sort-Reverse`
-| Restore-WorkspacePackages (rwp) | Restores NPM, Nuget, and Libman packages starting at the root folder of a workspace.
+| Command                           | Executes
+| ---                               | ---
+| gh                                | Launches browser to GitHub repo if the directory is tracked by Git and its origin url is at GitHub
+| reload                            | Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.
+| hosts                             | Opens the hosts file in VS Code
+| Syntax                            | Prints PowerShell Command Syntax vertically, replicating docs.microsoft.com layout
+| Sort-Reverse                      | Reverses the order of an array. Accepts pipeline support e.g. `1,2,3,4,5 | Sort-Reverse`
+| Restore-WorkspacePackages (rwp)   | Restores NPM, Nuget, and Libman packages starting at the root folder of a workspace.
 
 
 ## Contributing

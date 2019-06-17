@@ -7,13 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-
-- Added initial git & docker commands
-- Added hosts, reload, Syntax & Sort-Reverse commands
-
 ---
 
+## [1.0.0]
 
+### Added
 
-[Unreleased]: https://github.com/michaeljolley/vscode-twitch-themer/compare/4a9f707...HEAD
+- Tons :)
+- New `gh` command that launches browser to GitHub repo if the directory is a GitHub repo
+
+[Unreleased]: https://github.com/michaeljolley/vscode-twitch-themer/compare/[1.0.0]...HEAD
+[1.0.0]: https://github.com/michaeljolley/vscode-twitch-themer/compare/4a9f707...[1.0.0]
