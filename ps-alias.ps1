@@ -273,6 +273,18 @@ function Invoke-GitBinding {
     'f' { git fetch $Params }
     # init
     'i' { git init $Params }
+    # ignore
+    # TODO: Find where the proper .gitignore is...
+    'ig' { 
+      while($null -eq (Get-Item -Path .git -Force -ErrorAction SilentlyContinue)){
+        Push-Location ..
+      }
+      $Params | Add-Content .gitignore 
+      while($null -ne (Get-Location -stack).Path){
+        Pop-Location
+      }
+
+    }
     # log
     'l' { git log $Params }
     # pretty log
