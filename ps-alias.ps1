@@ -273,17 +273,27 @@ function Invoke-GitBinding {
     'f' { git fetch $Params }
     # init
     'i' { git init $Params }
-    # ignore
-    # TODO: Find where the proper .gitignore is...
-    'ig' { 
-      while($null -eq (Get-Item -Path .git -Force -ErrorAction SilentlyContinue)){
-        Push-Location ..
-      }
-      $Params | Add-Content .gitignore 
-      while($null -ne (Get-Location -stack).Path){
-        Pop-Location
-      }
-
+     # ignore
+     'ig' { 
+        try {
+            # Move up the directory tree until we find the .git directory.
+            while ($null -eq (Get-Item -Path .git -Force -ErrorAction SilentlyContinue)) {
+              if((Get-Item .).FullName -eq (Get-Item .).Root) {
+                throw
+              }
+                Push-Location ..
+            }
+            $Params | Add-Content .gitignore 
+        }
+        catch {
+          Write-Warning "You're not in a git repository. Nothing has been done."
+        }
+        finally {
+            # Move back to original location
+            while ($null -ne (Get-Location -stack).Path) {
+                Pop-Location
+            }
+        }
     }
     # log
     'l' { git log $Params }
