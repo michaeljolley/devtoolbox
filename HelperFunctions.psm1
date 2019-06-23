@@ -126,38 +126,6 @@ Function Edit-HostsFile {
 
 <#
   .SYNOPSIS
-  Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.
-
-  .DESCRIPTION
-  Powershell reload is based on code from this article by Øyvind Kallstad. -> https://communary.net/2015/05/28/how-to-reload-the-powershell-console-session/
-#>
-Function Invoke-PowerShell {
-  powershell -nologo
-  Invoke-PowerShell
-}
-
-Function Restart-PowerShell {
-  [Alias("reload")]
-  param()
-  if ($Host.Name -eq "ConsoleHost") {
-    exit
-  }
-  Write-Warning "Only usable while in the PowerShell console host"
-}
-
-# This code breaks the powershell reload infinite loop, so it's not calling itself forever.
-$parentProcessId = (Get-WmiObject Win32_Process -Filter "ProcessId=$PID").ParentProcessId
-$parentProcessName = (Get-WmiObject Win32_Process -Filter "ProcessId=$parentProcessId").ProcessName
-
-if ($host.Name -eq 'ConsoleHost') {
-  if (-not($parentProcessName -eq 'powershell.exe')) {
-    Invoke-PowerShell
-  }
-}
-# END POWERSHELL RELOAD
-
-<#
-  .SYNOPSIS
   Check to see if the current user is an administrator
 #>
 Function Test-PSHostHasAdministrator {
@@ -174,6 +142,7 @@ Function Test-PSHostHasAdministrator {
 }
 
 Function Restart-PSHost {
+  [Alias("Reload")]
   [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
   param
   (
@@ -210,3 +179,37 @@ Function Restart-PSHost {
     $proc.CloseMainWindow()
   }
 }
+
+# The following commented out section doesn't work in a module for me
+
+# <#
+#   .SYNOPSIS
+#   Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.
+
+#   .DESCRIPTION
+#   Powershell reload is based on code from this article by Øyvind Kallstad. -> https://communary.net/2015/05/28/how-to-reload-the-powershell-console-session/
+# #>
+# Function Invoke-PowerShell {
+#   powershell -nologo
+#   Invoke-PowerShell
+# }
+
+# Function Restart-PowerShell {
+#   [Alias("reload")]
+#   param()
+#   if ($Host.Name -eq "ConsoleHost") {
+#     exit
+#   }
+#   Write-Warning "Only usable while in the PowerShell console host"
+# }
+
+# # This code breaks the powershell reload infinite loop, so it's not calling itself forever.
+# $parentProcessId = (Get-WmiObject Win32_Process -Filter "ProcessId=$PID").ParentProcessId
+# $parentProcessName = (Get-WmiObject Win32_Process -Filter "ProcessId=$parentProcessId").ProcessName
+
+# if ($host.Name -eq 'ConsoleHost') {
+#   if (-not($parentProcessName -eq 'powershell.exe')) {
+#     Invoke-PowerShell
+#   }
+# }
+# # END POWERSHELL RELOAD
