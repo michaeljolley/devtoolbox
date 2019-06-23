@@ -99,6 +99,26 @@ function Invoke-GitBinding {
 
   return $infos
 }
+Function Get-DockerComposeCommands {
+  $cmds = @()
+  $dchelp = (docker-compose.exe --help).Split("`n")
+  $startIndex = $dchelp.IndexOf("Commands:") + 1
+  for ($i = $startIndex; $i -lt $dchelp.Count; $i++) {
+      $cmdline = $dchelp[$i].Trim()
+      $cmds += $cmdline.Substring(0, $cmdline.IndexOf(" "))
+  }
+  return $cmds
+}
+Function Get-DockerComposeServices {
+  $contents = Get-Content $(if (-not (Test-Path ./docker-compose.yaml)) { "./docker-compose.yml" } else { "./docker-compose.yaml" })
+  [Microsoft.PowerShell.Commands.MatchInfo[]]$categories = $contents | Select-String -Pattern "^\w+:$"
+  $servicesIndex = $categories.IndexOf($($categories | Where-Object Line -Match "services:"))
+  $startIndex = $categories[$servicesIndex].LineNumber
+  $endIndex = if ($categories.Count -gt 1) { $categories[$serviceIndex + 1].LineNumber - 1 } else { $contents.Length }
+  $contents2 = $contents.Split("`n") | Select-Object -Skip $startIndex -First $endIndex
+  $srv = $contents2 | Select-String -Pattern "^\s{2}\w+:" | Select-Object -ExpandProperty Line
+  return $srv | ForEach-Object { $_.Trim().Replace(":", "") } | Sort-Object
+}
 # End Utility Functions
 
 function Restore-WorkspacePackages {
@@ -229,6 +249,36 @@ Register-ArgumentCompleter -CommandName Invoke-DockerBinding -ParameterName Para
   }
 }
 
+function Invoke-DockerCompose {
+  [Alias("dc")]
+  Param(
+    [Parameter(Mandatory=$true, Position =0)]
+    [string]$Command,
+    [Parameter(ValueFromRemainingArguments=$true)]
+    [string[]]$Params
+  )
+
+  switch ($Command) {
+    'b' { docker-compose build $Params }
+    'bu' { docker-compose build $Params; docker-compose up }
+    'd' { docker-compose down $Params }
+    'i' { docker-compose images $Params }
+    'u' { docker-compose up $Params }
+    default: { docker-compose $Command $Params }
+  }
+}
+
+Register-ArgumentCompleter -CommandName Invoke-DockerCompose -ParameterName Command -ScriptBlock {
+  param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
+  $cmds = Get-DockerComposeCommands
+  return $(if ($wordToComplete) { $cmds | Where-Object { $_ -like "$wordToComplete *" } } else { $cmds })
+}
+
+Register-ArgumentCompleter -CommandName Invoke-DockerCompose -ParameterName Params -ScriptBlock {
+  param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
+  $services = Get-DockerComposeServices
+  return $services
+}
 
 function Invoke-GitHubRepository {
   [Alias('gh')]
