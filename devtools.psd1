@@ -21,16 +21,16 @@ ModuleVersion = '0.1'
 GUID = '2bd940f7-480c-4663-856b-ed092c1ad1f5'
 
 # Author of this module
-Author = 'MichaelJolley'
+Author = 'Michael Jolley'
 
 # Company or vendor of this module
 # CompanyName = 'Unknown'
 
 # Copyright statement for this module
-Copyright = '(c) 2019 MichaelJolley. All rights reserved.'
+Copyright = '(c) 2019 Michael Jolley. All rights reserved.'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = 'A PowerShell module that enables software developers to speed up their CLI workflow.'
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
