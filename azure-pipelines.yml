@@ -24,7 +24,5 @@ steps:
 #    testRunner: NUnit
 #    searchFolder: '$(Common.TestResultsDirectory)'
 
-- powershell: Publish-Module -Name "devtools"
+- powershell: Publish-Module -Name "devtools" -NuGetApiKey $(NugetAPIKey)
   displayName: 'Publish PowerShell Module'
-  env:
-    psgallery: $(NugetAPIKey)
