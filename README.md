@@ -1,4 +1,4 @@
-# PowerShell Alias
+# devtools
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributing)
 
@@ -7,7 +7,7 @@ For more information as to how this repo came about, check out this [blog post](
 PowerShell scripts that enables shorthand for common commands for Docker, Git, and more.
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/1228996/57589863-f307f680-74ec-11e9-91fd-a9bd07bcbb7c.png"/>
+    <img src="https://user-images.githubusercontent.com/1228996/60115974-c1658a80-973c-11e9-84a3-56ea7a3892b9.png"/>
 </p>
 
 ## Parameters
@@ -17,9 +17,9 @@ All aliases accept parameters of the commands they call.
 For example, the below are identical:
 
 ```CMD
-g cl https://github.com/MichaelJolley/ps-alias.git
+g cl https://github.com/MichaelJolley/devtools.git
 
-git clone https://github.com/MichaelJolley/ps-alias.git
+git clone https://github.com/MichaelJolley/devtools.git
 ```
 
 ## Commands
