@@ -27,7 +27,7 @@ Function Get-DockerImages {
   param(
     [switch]$a
   )
-  
+
   $params = @()
   $params += "image","ls"
   if ($a) {
@@ -43,7 +43,7 @@ Function Get-DockerImages {
     $columns = [regex]::Split($_, "\s{2,}") | Where-Object { -not [string]::IsNullOrEmpty($_) }
     $info = New-Object PSCustomObject
     for ($i = 0; $i -lt $titles.Count; $i++) {
-      
+
       $info | Add-Member -MemberType NoteProperty -Name $titles[$i].Replace(" ", "") -Value $columns[$i]
     }
     $infos += $info
@@ -128,3 +128,5 @@ Register-ArgumentCompleter -CommandName Invoke-Docker -ParameterName Parameters 
     return $options
   }
 }
+
+Export-ModuleMember -Alias * -Function *

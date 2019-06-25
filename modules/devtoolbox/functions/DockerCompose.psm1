@@ -39,7 +39,7 @@ Function Invoke-DockerCompose {
 
   $params = @()
   $params += $Parameters
-  
+
   switch ($Command) {
     "b" { docker-compose build @params }
     "c" { docker-compose create @params }
@@ -79,3 +79,5 @@ Register-ArgumentCompleter -CommandName Invoke-DockerCompose -ParameterName Para
     return $services | Where-Object {-not ($commandAst.CommandElements | Select-Object -ExpandProperty Value).Contains($_)}
   }
 }
+
+Export-ModuleMember -Alias * -Function *

@@ -47,3 +47,5 @@ Function Invoke-Git {
     default { git $Cmd $Params }
   }
 }
+
+Export-ModuleMember -Alias * -Function *

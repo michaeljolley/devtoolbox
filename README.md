@@ -1,14 +1,12 @@
-# devtools
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/1228996/60140866-b9c3d700-9778-11e9-819b-9e45076a33da.png"/>
+</p>
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributing)
+| Release | vNext | Contributors
+| -- | -- | --
+| [![Build Status](https://dev.azure.com/michaeljolley/devtoolbox/_apis/build/status/MichaelJolley.devtools?branchName=master)](https://dev.azure.com/michaeljolley/devtoolbox/_build/latest?definitionId=4&branchName=master) | [![Build Status](https://dev.azure.com/michaeljolley/devtoolbox/_apis/build/status/MichaelJolley.devtools?branchName=vNext)](https://dev.azure.com/michaeljolley/devtoolbox/_build/latest?definitionId=4&branchName=vNext) | [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributing)
 
 For more information as to how this repo came about, check out this [blog post](https://michaeljolley.com/posts/setup-command-aliases-in-powershell-to-make-life-easier/)
-
-PowerShell scripts that enables shorthand for common commands for Docker, Git, and more.
-
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/1228996/60115974-c1658a80-973c-11e9-84a3-56ea7a3892b9.png"/>
-</p>
 
 ## Parameters
 

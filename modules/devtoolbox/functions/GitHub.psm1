@@ -18,3 +18,4 @@ Function Invoke-GitHubRepository {
   }
 }
 
+Export-ModuleMember -Alias * -Function *

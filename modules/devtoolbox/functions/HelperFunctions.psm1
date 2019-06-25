@@ -1,16 +1,16 @@
 <#
     .SYNOPSIS
     Restore NPM, Nuget, and/or Libman packages within this directory or sub-directories
-    
+
     .PARAMETER NPM
     Restore NPM packages
-    
+
     .PARAMETER Nuget
     Restore Nuget packages
-    
+
     .PARAMETER Libman
     Restore Libman packages
-    
+
     .LINK
     https://github.com/michaeljolley/ps-alias
 #>
@@ -213,3 +213,5 @@ Function Restart-PSHost {
 #   }
 # }
 # # END POWERSHELL RELOAD
+
+Export-ModuleMember -Alias * -Function *
