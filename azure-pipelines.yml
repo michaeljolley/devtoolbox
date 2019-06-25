@@ -24,5 +24,6 @@ steps:
 #    testRunner: NUnit
 #    searchFolder: '$(Common.TestResultsDirectory)'
 
-- powershell: Publish-Module -Path $(Build.Repository.LocalPath) -NuGetApiKey $(NugetAPIKey)
+- powershell: Import-Module -Name "mjtools"
+- powershell: Publish-Module -Name "mjtools" -NuGetApiKey $(NugetAPIKey)
   displayName: 'Publish PowerShell Module'
