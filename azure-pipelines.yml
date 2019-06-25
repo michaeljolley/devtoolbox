@@ -1,5 +1,5 @@
 # Docs: https://aka.ms/yaml
-name: $(Build.DefinitionName)_$(Date:yyyyMMdd))
+name: $(Build.DefinitionName)_$(GitVersion_InformationalVersion)
 pr:
 - master
 
@@ -7,8 +7,8 @@ queue:
   name: Hosted VS2017
 
 steps:
-- powershell: .\_build\bootstrap.ps1
-  displayName: 'Install pre-requisites'
+# - powershell: .\_build\bootstrap.ps1
+#  displayName: 'Install pre-requisites'
 
 #- task: richardfennellBM.BM-VSTS-PesterRunner-Task.Pester-Task.Pester@8
 #  displayName: 'Pester Test Runner'
@@ -24,7 +24,7 @@ steps:
 #    testRunner: NUnit
 #    searchFolder: '$(Common.TestResultsDirectory)'
 
-- powershell: Invoke-Build -Configuration 'Production' -Task Clean, CopyModuleFiles, PublishModule
+- powershell: Publish-Module -Name "devtools"
   displayName: 'Publish PowerShell Module'
   env:
     psgallery: $(NugetAPIKey)
