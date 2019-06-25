@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Added `dc` alias for docker-compose functionality.
+
 ---
 
 ## [1.0.0]
@@ -16,5 +18,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tons :)
 - New `gh` command that launches browser to GitHub repo if the directory is a GitHub repo
 
-[Unreleased]: https://github.com/michaeljolley/vscode-twitch-themer/compare/[1.0.0]...HEAD
-[1.0.0]: https://github.com/michaeljolley/vscode-twitch-themer/compare/4a9f707...[1.0.0]
+[Unreleased]: https://github.com/michaeljolley/devtools/compare/[1.0.0]...HEAD
+[1.0.0]: https://github.com/michaeljolley/devtools/compare/4a9f707...[1.0.0]
