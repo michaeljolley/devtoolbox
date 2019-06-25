@@ -1,19 +1,30 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-trigger:
+# Docs: https://aka.ms/yaml
+name: $(Build.DefinitionName)_$(Date:yyyyMMdd))
+pr:
 - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+queue:
+  name: Hosted VS2017
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+#- powershell: .\bootstrap.ps1
+#  displayName: 'Install pre-requisites'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+#- task: richardfennellBM.BM-VSTS-PesterRunner-Task.Pester-Task.Pester@8
+#  displayName: 'Pester Test Runner'
+#  inputs:
+#    scriptFolder: '$(System.DefaultWorkingDirectory)\tests\*'
+#    additionalModulePath: '$(Build.ArtifactStagingDirectory)'
+#    resultsFile: '$(Common.TestResultsDirectory)\Test-$(Build.DefinitionName)_$(Build.BuildNumber).xml'
+
+#- task: PublishTestResults@2
+#  displayName: 'Publish Test Results'
+#  condition: always()
+#  inputs:
+#    testRunner: NUnit
+#    searchFolder: '$(Common.TestResultsDirectory)'
+
+- powershell: Invoke-Build -Configuration 'Production' -Task Clean, CopyModuleFiles, PublishModule
+  displayName: 'Publish PowerShell Module'
+  env:
+    psgallery: $(NugetAPIKey)
