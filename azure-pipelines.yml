@@ -7,8 +7,8 @@ queue:
   name: Hosted VS2017
 
 steps:
-#- powershell: .\bootstrap.ps1
-#  displayName: 'Install pre-requisites'
+- powershell: .\_build\bootstrap.ps1
+  displayName: 'Install pre-requisites'
 
 #- task: richardfennellBM.BM-VSTS-PesterRunner-Task.Pester-Task.Pester@8
 #  displayName: 'Pester Test Runner'
