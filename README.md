@@ -17,9 +17,9 @@ All aliases accept parameters of the commands they call.
 For example, the below are identical:
 
 ```CMD
-g cl https://github.com/MichaelJolley/devtools.git
+g cl https://github.com/MichaelJolley/devtoolbox.git
 
-git clone https://github.com/MichaelJolley/devtools.git
+git clone https://github.com/MichaelJolley/devtoolbox.git
 ```
 
 ## Commands

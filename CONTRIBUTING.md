@@ -27,7 +27,7 @@ Fork, then clone the repo:
 
 **All changes should be based from the `vNext` branch.**
 
-Push to your fork and [submit a pull request](https://github.com/michaeljolley/devtools/compare/) against the `vNext` branch.
+Push to your fork and [submit a pull request](https://github.com/michaeljolley/devtoolbox/compare/) against the `vNext` branch.
 
 At this point you're waiting on us. We like to at least comment on pull requests
 within three days (and, typically, one day). We may suggest

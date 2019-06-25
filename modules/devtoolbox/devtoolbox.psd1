@@ -12,7 +12,7 @@
 # RootModule = ''
 
 # Version number of this module.
-ModuleVersion = '0.1'
+ModuleVersion = '0.3'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -27,7 +27,7 @@ Author = 'Michael Jolley'
 # CompanyName = 'Unknown'
 
 # Copyright statement for this module
-Copyright = '(c) 2019 Michael Jolley. All rights reserved.'
+Copyright = '2019 Michael Jolley. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'A PowerShell module that enables software developers to speed up their CLI workflow.'
@@ -118,16 +118,16 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+        Tags = @('docker', 'git', 'docker-compose', 'alias')
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/MichaelJolley/devtoolbox/blob/master/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = 'https://github.com/MichaelJolley/devtools'
+        ProjectUri = 'https://github.com/MichaelJolley/devtoolbox'
 
         # A URL to an icon representing this module.
-        # IconUri = ''
+        IconUri = 'https://user-images.githubusercontent.com/1228996/60137349-4025ec00-976c-11e9-82f1-db6f8e1a3af8.png'
 
         # ReleaseNotes of this module
         # ReleaseNotes = ''
@@ -137,7 +137,7 @@ PrivateData = @{
 } # End of PrivateData hashtable
 
 # HelpInfo URI of this module
-# HelpInfoURI = ''
+HelpInfoURI = 'https://github.com/MichaelJolley/devtoolbox/issues'
 
 # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
 # DefaultCommandPrefix = ''
