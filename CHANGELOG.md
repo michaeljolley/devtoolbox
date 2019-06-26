@@ -7,16 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Added `dc` alias for docker-compose functionality.
-
 ---
 
-## [1.0.0]
+## [0.0.4]
 
 ### Added
 
-- Tons :)
+- Converted repo into a PowerShell Module and renamed to devtoolbox
+- Added `dc` alias for docker-compose functionality
 - New `gh` command that launches browser to GitHub repo if the directory is a GitHub repo
+- Tons :)
 
-[Unreleased]: https://github.com/michaeljolley/devtools/compare/[1.0.0]...HEAD
-[1.0.0]: https://github.com/michaeljolley/devtools/compare/4a9f707...[1.0.0]
+[Unreleased]: https://github.com/michaeljolley/devtools/compare/[0.0.4]...HEAD
+[0.0.4]: https://github.com/michaeljolley/devtools/compare/4a9f707...[0.0.4]
