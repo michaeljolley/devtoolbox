@@ -48,4 +48,3 @@ Function Invoke-Git {
   }
 }
 
-Export-ModuleMember -Alias * -Function *
