@@ -12,7 +12,7 @@
 # RootModule = ''
 
 # Version number of this module.
-ModuleVersion = '0.5.0'
+ModuleVersion = '0.6.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -69,27 +69,17 @@ Description = 'A PowerShell module that enables software developers to speed up 
 NestedModules = @('./functions/Docker.psm1','./functions/DockerCompose.psm1','./functions/Git.psm1','./functions/GitHub.psm1','./functions/HelperFunctions.psm1')
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-# FunctionsToExport = @(
-#     'Invoke-Docker',
-#     'Invoke-DockerCompose',
-#     'Invoke-Git'
-#     'Invoke-GitHubRepository',
-#     'Restore-WorkspacePackages',
-#     'Get-Syntax',
-#     'Invoke-ReverseSort',
-#     'Edit-HostsFile',
-#     'Invoke-PowerShell',
-#     'Restart-PowerShell',
-#     'Test-PSHostHasAdministrator',
-#     'Restart-PSHost'
-# )
 FunctionsToExport = @(
-    'Invoke-Git',
+    'Invoke-Docker',
+    'Invoke-DockerCompose',
+    'Invoke-Git'
     'Invoke-GitHubRepository',
     'Restore-WorkspacePackages',
     'Get-Syntax',
     'Invoke-ReverseSort',
     'Edit-HostsFile',
+    'Invoke-PowerShell',
+    'Restart-PowerShell',
     'Test-PSHostHasAdministrator',
     'Restart-PSHost'
 )
@@ -101,7 +91,18 @@ CmdletsToExport = @()
 VariablesToExport = '*'
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-AliasesToExport = '*'
+AliasesToExport = @(
+    'd',
+    'dc',
+    'g',
+    'gh',
+    'hosts',
+    'IsAdmin',
+    'Reload',
+    'rwp',
+    'Sort-Reverse',
+    'Syntax'
+)
 
 # DSC resources to export from this module
 # DscResourcesToExport = @()
