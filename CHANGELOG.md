@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.0.5]
+
+### Changed
+
+- Modified versioning schema
+
 ## [0.0.4]
 
 ### Added
@@ -18,5 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New `gh` command that launches browser to GitHub repo if the directory is a GitHub repo
 - Tons :)
 
-[Unreleased]: https://github.com/michaeljolley/devtools/compare/[0.0.4]...HEAD
+[Unreleased]: https://github.com/michaeljolley/devtools/compare/[0.0.5]...HEAD
+[0.0.5]: https://github.com/michaeljolley/devtools/compare/[0.0.4]...[0.0.5]
 [0.0.4]: https://github.com/michaeljolley/devtools/compare/4a9f707...[0.0.4]
