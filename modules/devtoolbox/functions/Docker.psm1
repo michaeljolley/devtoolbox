@@ -129,4 +129,3 @@ Register-ArgumentCompleter -CommandName Invoke-Docker -ParameterName Parameters 
   }
 }
 
-Export-ModuleMember -Alias * -Function *

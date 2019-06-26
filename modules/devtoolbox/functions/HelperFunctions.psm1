@@ -213,5 +213,3 @@ Function Restart-PSHost {
 #   }
 # }
 # # END POWERSHELL RELOAD
-
-Export-ModuleMember -Alias * -Function *

@@ -17,5 +17,3 @@ Function Invoke-GitHubRepository {
     Write-Warning "Directory not tracked by GitHub"
   }
 }
-
-Export-ModuleMember -Alias * -Function *
