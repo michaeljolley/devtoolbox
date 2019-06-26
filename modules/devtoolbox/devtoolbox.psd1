@@ -66,7 +66,7 @@ Description = 'A PowerShell module that enables software developers to speed up 
 # FormatsToProcess = @()
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-NestedModules = @('./functions/Docker.psm1','./functions/DockerCompose.psm1','./functions/Git.psm1','./functions/GitHub.psm1','./functions/HelperFunctions.psm1')
+NestedModules = @('./functions/Docker.psm1','./functions/DockerCompose.psm1','./functions/Git.psm1','./functions/GitHub.psm1','./functions/HelperFunctions.psm1','./RefreshEnv.psm1')
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
@@ -81,7 +81,8 @@ FunctionsToExport = @(
     'Invoke-PowerShell',
     'Restart-PowerShell',
     'Test-PSHostHasAdministrator',
-    'Restart-PSHost'
+    'Restart-PSHost',
+    'Refresh-Environment'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
