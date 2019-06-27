@@ -1,19 +1,26 @@
-Function Refresh-Environment {
+Function Invoke-RefreshEnvironment {
   [Alias("refreshenv")]
   [Alias("reload")]
   param()
-  $env = @()
   if ($IsWindows) {
     $SystemEnvironment = Get-Item "HKLM:\System\CurrentControlSet\Control\Session Manager\Environment"
     $UserEnvironment = Get-Item "HKCU:\Environment"
-    $SystemEnvironment | Select-Object -ExpandProperty Property | Foreach-Object {
-      Set-Item -Path "Env:\$_" = $SystemEnvironment.GetValue($_)
+    Push-Location Env:
+    $SystemEnvironment | Select-Object -ExpandProperty Property | Where-Object {$_ -notlike "PS*"} | Foreach-Object {
+      Set-Item -Path "$_" $SystemEnvironment.GetValue($_)
     }
-    $UserEnvironment | Select-Object -ExpandProperty Property | Foreach-Object {
-      Set-Item -Path "Env:\$_" = $UserEnvironment.GetValue($_)
+    $UserEnvironment | Select-Object -ExpandProperty Property | Where-Object {$_ -notlike "PS*"} | Foreach-Object {
+      if ($_ -eq "Path") {
+        Set-Item -Path "$_" ((Get-Item Path).Value + ";" + $UserEnvironment.GetValue($_))
+      }
+      else {
+        Set-Item -Path "$_" ($existing + $UserEnvironment.GetValue($_))
+      }
     }
+    Set-Item USERNAME $([Environment]::USERNAME)
+    Pop-Location
   }
   if (Test-Path $PROFILE -ErrorAction SilentlyContinue) {
-    . $PROFILE
+    & $PROFILE
   }
 }

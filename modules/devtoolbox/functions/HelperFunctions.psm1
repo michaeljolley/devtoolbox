@@ -142,7 +142,6 @@ Function Test-PSHostHasAdministrator {
 }
 
 Function Restart-PSHost {
-  [Alias("Reload")]
   [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
   param
   (
