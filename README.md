@@ -92,10 +92,6 @@ All aliases for Git begin with `g`.
 | Syntax                            | Prints PowerShell Command Syntax vertically, replicating docs.microsoft.com layout
 | Sort-Reverse                      | Reverses the order of an array. Accepts pipeline support e.g. `1,2,3,4,5 | Sort-Reverse`
 | p `<dirname>`                   | Changes your current directory to the directory of the project you provide. It will search the root directory (or the current directory if no root directory is set in the environment variables) recursively for the project directory you provided.
-| set-proj `<rootpath>`               | Sets the root path to search for projects in your environment variables
-| get-proj                          | Shows the currently set root path
-| set-proj-depth `<depth>`          | Sets the depth of directories to search for project folders. The default is 2
-| get-proj-depth                    | Shows the currently set search depth
 
 ## Contributing
 

@@ -90,10 +90,6 @@ FunctionsToExport = @(
     'Test-PSHostHasAdministrator',
     'Restart-PSHost',
     'Out-Menu',
-    'Get-GotoDevProjectDepth',
-    'Set-GotoDevProjectDepth',
-    'Get-GotoDevProjectRoot',
-    'Set-GotoDevProjectRoot',
     'Invoke-GotoDevProject'
 )
 
