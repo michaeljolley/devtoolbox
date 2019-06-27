@@ -72,7 +72,7 @@ NestedModules = @(
     './functions/Git.psm1',
     './functions/GitHub.psm1',
     './functions/HelperFunctions.psm1',
-    './functions/RefreshEnv.psm1'
+    './functions/ReloadEnv.psm1'
 )
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
@@ -89,7 +89,7 @@ FunctionsToExport = @(
     'Restart-PowerShell',
     'Test-PSHostHasAdministrator',
     'Restart-PSHost',
-    'Invoke-RefreshEnvironment'
+    'Invoke-ReloadEnvironment'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -107,7 +107,6 @@ AliasesToExport = @(
     'hosts',
     'IsAdmin',
     'reload',
-    'refreshenv',
     'rwp',
     'Sort-Reverse',
     'Syntax'

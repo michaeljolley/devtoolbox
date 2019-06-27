@@ -1,5 +1,4 @@
-Function Invoke-RefreshEnvironment {
-  [Alias("refreshenv")]
+Function Invoke-ReloadEnvironment {
   [Alias("reload")]
   param()
   if ($IsWindows) {
