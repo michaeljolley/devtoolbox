@@ -114,7 +114,9 @@ AliasesToExport = @(
     'Reload',
     'rwp',
     'Sort-Reverse',
-    'Syntax'
+    'Syntax',
+    'p',
+    'proj'
 )
 
 # DSC resources to export from this module
