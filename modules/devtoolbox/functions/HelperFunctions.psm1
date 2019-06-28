@@ -142,7 +142,6 @@ Function Test-PSHostHasAdministrator {
 }
 
 Function Restart-PSHost {
-  [Alias("Reload")]
   [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
   param
   (
@@ -213,5 +212,3 @@ Function Restart-PSHost {
 #   }
 # }
 # # END POWERSHELL RELOAD
-
-Export-ModuleMember -Alias * -Function *

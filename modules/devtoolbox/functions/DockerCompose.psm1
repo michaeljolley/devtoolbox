@@ -80,4 +80,3 @@ Register-ArgumentCompleter -CommandName Invoke-DockerCompose -ParameterName Para
   }
 }
 
-Export-ModuleMember -Alias * -Function *
