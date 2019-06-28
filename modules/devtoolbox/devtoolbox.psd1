@@ -72,7 +72,8 @@ NestedModules = @(
     './functions/Git.psm1',
     './functions/GitHub.psm1',
     './functions/HelperFunctions.psm1',
-    './functions/GotoDevProject.psm1'
+    './functions/GotoDevProject.psm1',
+    './functions/ReloadEnv.psm1'
 )
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
@@ -91,6 +92,7 @@ FunctionsToExport = @(
     'Restart-PSHost',
     'Out-Menu',
     'Invoke-GotoDevProject'
+    'Invoke-ReloadEnvironment'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -107,7 +109,7 @@ AliasesToExport = @(
     'gh',
     'hosts',
     'IsAdmin',
-    'Reload',
+    'reload',
     'rwp',
     'Sort-Reverse',
     'Syntax',

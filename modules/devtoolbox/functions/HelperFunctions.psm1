@@ -177,51 +177,6 @@ Function Restart-PSHost {
   }
 }
 
-# The following commented out section doesn't work in a module for me
-
-<#
-  .SYNOPSIS
-  Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.
-
-  .DESCRIPTION
-  Powershell reload is based on code from this article by Øyvind Kallstad. -> https://communary.net/2015/05/28/how-to-reload-the-powershell-console-session/
-#>
-Function Invoke-PowerShell {
-  if ((Get-Process -PID $PID).Name -eq "powershell") {
-    powershell -nologo
-  }
-  else {
-    pwsh -nologo
-  }
-  Invoke-PowerShell
-}
-
-Function Restart-PowerShell {
-  [Alias("reload")]
-  param()
-  if ($Host.Name -eq "ConsoleHost") {
-    exit
-  }
-  Write-Warning "Only usable while in the PowerShell console host"
-}
-
-if ($PSVersionTable.PSVersion.Major -lt 6 -and $IsWindows) {
-  # This code breaks the powershell reload infinite loop, so it's not calling itself forever.
-  $parentProcessId = (Get-WmiObject Win32_Process -Filter "ProcessId=$PID").ParentProcessId
-  $parentProcessName = (Get-WmiObject Win32_Process -Filter "ProcessId=$parentProcessId").ProcessName
-}
-elseif (-not $IsWindows) {
-  $parentProcessId = (Get-Process -PID $PID).Parent.Id
-  $parentProcessName = (Get-Process -PID $PID).Parent.Name
-}
-
-# if ($host.Name -eq 'ConsoleHost') {
-#   if (-not($parentProcessName -eq 'powershell') -or -not($parentProcessName -eq 'pwsh')) {
-#     Invoke-PowerShell
-#   }
-# }
-# END POWERSHELL RELOAD
-
 Function Out-Menu {
   [Alias("menu")]
   param(
