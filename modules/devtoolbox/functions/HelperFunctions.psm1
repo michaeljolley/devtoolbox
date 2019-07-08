@@ -10,9 +10,6 @@
 
     .PARAMETER Libman
     Restore Libman packages
-
-    .LINK
-    https://github.com/michaeljolley/ps-alias
 #>
 Function Restore-WorkspacePackages {
   [Alias('rwp')]
@@ -142,6 +139,7 @@ Function Test-PSHostHasAdministrator {
 }
 
 Function Restart-PSHost {
+  # [Alias("Reload")]
   [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
   param
   (
@@ -179,36 +177,81 @@ Function Restart-PSHost {
   }
 }
 
-# The following commented out section doesn't work in a module for me
+Function Out-Menu {
+  [Alias("menu")]
+  param(
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+    [object[]]$Object,
+    [string]$Header,
+    [string]$Footer,
+    [switch]$AllowCancel,
+    [switch]$AllowMultiple
+  )
 
-# <#
-#   .SYNOPSIS
-#   Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.
+  if ($input) {
+    $Object = @($input)
+  }
 
-#   .DESCRIPTION
-#   Powershell reload is based on code from this article by Øyvind Kallstad. -> https://communary.net/2015/05/28/how-to-reload-the-powershell-console-session/
-# #>
-# Function Invoke-PowerShell {
-#   powershell -nologo
-#   Invoke-PowerShell
-# }
+  Write-Host ""
 
-# Function Restart-PowerShell {
-#   [Alias("reload")]
-#   param()
-#   if ($Host.Name -eq "ConsoleHost") {
-#     exit
-#   }
-#   Write-Warning "Only usable while in the PowerShell console host"
-# }
+  do {
+    $prompt = New-Object System.Text.StringBuilder
+    switch ($true) {
+      { [bool]$Header -and $Header -notmatch '^(?:\s+)?$' } { $null = $prompt.Append($Header); break }
+      $true { $null = $prompt.Append('Choose an option:') }
+      $AllowCancel { $null = $prompt.Append(', or enter "c" to cancel.') }
+      $AllowMultiple { $null = $prompt.Append('`nTo select multiple, enter numbers separated by a comma. EX: 1, 2') }
+    }
 
-# # This code breaks the powershell reload infinite loop, so it's not calling itself forever.
-# $parentProcessId = (Get-WmiObject Win32_Process -Filter "ProcessId=$PID").ParentProcessId
-# $parentProcessName = (Get-WmiObject Win32_Process -Filter "ProcessId=$parentProcessId").ProcessName
+    Write-Host $prompt.ToString()
 
-# if ($host.Name -eq 'ConsoleHost') {
-#   if (-not($parentProcessName -eq 'powershell.exe')) {
-#     Invoke-PowerShell
-#   }
-# }
-# # END POWERSHELL RELOAD
+    $nums = $Object.Count.ToString().Length
+    for ($i = 0; $i -lt $Object.Count; $i++) {
+      Write-Host "$("{0:D$nums}" -f ($i+1)). $($Object[$i])"
+    }
+
+    if ($Footer) {
+      if ($Footer.EndsWith(".")) {
+        $Footer = $Footer.Replace(".",":")
+      }
+      Write-Host $Footer " " -NoNewLine
+    }
+
+    if ($AllowMultiple) {
+      $answers = @(Read-Host).Split(",").Trim()
+
+      if ($AllowCancel -and $answers -match 'c') {
+        return
+      }
+
+      $ok = $true
+      foreach ($ans in $answers) {
+        if ($ans -in 1..$Object.Count) {
+          $Object[$ans - 1]          
+        }
+        else {
+          Write-Host "Not an option!" -ForegroundColor Red
+          Write-Host ""
+          $ok = $false
+        }
+      }
+    }
+    else {
+      $answer = Read-Host
+
+      if ($AllowCancel -and $answer -eq 'c') {
+        return
+      }
+
+      $ok = $true
+      if ($answer -in 1..$Object.Count) {
+        $Object[$answer - 1]
+      } 
+      else {
+        Write-Host "Not an option!" -ForegroundColor Red
+        Write-Host ""
+        $ok = $false
+      }
+    }
+  } while (-not $ok)
+}

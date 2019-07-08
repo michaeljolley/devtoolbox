@@ -87,10 +87,11 @@ All aliases for Git begin with `g`.
 | ---                               | ---
 | gh                                | Launches browser to GitHub repo if the directory is tracked by Git and its origin url is at GitHub
 | hosts                             | If in Windows, opens the hosts file in an elevated editor. Choosing, in order, between VS Code, VS Code (insiders), Notepad.
-| reload                            | Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.
+| ~~reload~~                            | ~~Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.~~
 | Restore-WorkspacePackages (rwp)   | Restores NPM, Nuget, and Libman packages starting at the root folder of a workspace.
 | Syntax                            | Prints PowerShell Command Syntax vertically, replicating docs.microsoft.com layout
 | Sort-Reverse                      | Reverses the order of an array. Accepts pipeline support e.g. `1,2,3,4,5 | Sort-Reverse`
+| p `<dirname>`                   | Changes your current directory to the directory of the project you provide. It will search the root directory (or the current directory if no root directory is set in the environment variables) recursively for the project directory you provided.
 
 ## Contributing
 

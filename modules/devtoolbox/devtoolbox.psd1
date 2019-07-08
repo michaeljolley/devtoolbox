@@ -72,6 +72,7 @@ NestedModules = @(
     './functions/Git.psm1',
     './functions/GitHub.psm1',
     './functions/HelperFunctions.psm1',
+    './functions/GotoDevProject.psm1',
     './functions/ReloadEnv.psm1'
 )
 
@@ -89,6 +90,8 @@ FunctionsToExport = @(
     'Restart-PowerShell',
     'Test-PSHostHasAdministrator',
     'Restart-PSHost',
+    'Out-Menu',
+    'Invoke-GotoDevProject'
     'Invoke-ReloadEnvironment'
 )
 
@@ -109,7 +112,9 @@ AliasesToExport = @(
     'reload',
     'rwp',
     'Sort-Reverse',
-    'Syntax'
+    'Syntax',
+    'p',
+    'proj'
 )
 
 # DSC resources to export from this module
