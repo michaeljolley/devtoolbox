@@ -54,7 +54,13 @@ Function Restore-WorkspacePackages {
       $children | ForEach-Object {
         Write-Host "-  Restoring $($_.Directory)..." -ForegroundColor Yellow
         Push-Location $_.Directory
-        npm install
+        if ($PSBoundParameters.ContainsKey("CI")) {
+          Write-Host "Cleaning Slate..."
+          npm ci
+        }
+        else {
+          npm install
+        }
         Pop-Location
       }
     }
