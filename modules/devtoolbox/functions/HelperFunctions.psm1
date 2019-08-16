@@ -14,7 +14,7 @@
 Function Restore-WorkspacePackages {
   [Alias('rwp')]
   [CmdletBinding(DefaultParameterSetName = "Default")]
-  param(
+  Param (
     [Parameter(ParameterSetName = "NPM", HelpMessage = "Restore only NPM packages")]
     [switch]$NPM,
     [Parameter(ParameterSetName = "Nuget", HelpMessage = "Restore only Nuget packages")]
@@ -23,38 +23,65 @@ Function Restore-WorkspacePackages {
     [switch]$Libman
   )
 
-  $restoreNpm = -not ($null -eq (Get-Command npm -ErrorAction SilentlyContinue))
-  $restoreDotnet = -not ($null -eq (Get-Command dotnet -ErrorAction SilentlyContinue))
-  $restoreLibman = -not ($null -eq (Get-Command libman -ErrorAction SilentlyContinue))
-
-  if ($restoreNpm -and ($PSCmdlet.ParameterSetName -eq "Default" -or $PSCmdlet.ParameterSetName -eq "NPM")) {
-    Write-Host "Restoring NPM packages"
-    Get-ChildItem -Filter package.json -Recurse | Where-Object Directory -NotLike "*node_module*" | ForEach-Object {
-      Write-Host "-  Restoring $($_.Directory)..." -ForegroundColor Yellow
-      Push-Location $_.Directory
-      npm install --no-save
-      Pop-Location
+  DynamicParam {
+    $paramDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+    if ($NPM) {
+      $cleanSlateAttribute = New-Object System.Management.Automation.ParameterAttribute
+      $cleanSlateAttribute.Position = 1
+      $cleanSlateAttribute.Mandatory = $false
+      $cleanSlateAttribute.HelpMessage = "Installs NPM packages with a clean slate"
+      $attributeCollection = New-Object System.Collections.ObjectModel.Collection[System.Attribute]
+      $attributeCollection.Add($cleanSlateAttribute)
+      $cleanSlateParam = New-Object System.Management.Automation.RuntimeDefinedParameter('CI', [switch], $attributeCollection)
+      $paramDictionary.Add('CI', $cleanSlateParam)
     }
+    return $paramDictionary
   }
 
-  if ($restoreDotnet -and ($PSCmdlet.ParameterSetName -eq "Default" -or $PSCmdlet.ParameterSetName -eq "Nuget")) {
-    Write-Host "Restoring NuGet packages"
-    Get-ChildItem -Filter *.*proj -Recurse | ForEach-Object {
-      Write-Host "-  Restoring $($_.Directory)..." -ForegroundColor Yellow
-      Push-Location $_.Directory
-      dotnet restore
-      Pop-Location
-    }
-  }
+  Process {
 
-  if ($restoreLibman -and ($PSCmdlet.ParameterSetName -eq "Default" -or $PSCmdlet.ParameterSetName -eq "Libman")) {
-    Write-Host "Restoring Libman packages"
-    Get-ChildItem -Filter libman.json -Recurse | ForEach-Object {
-      Write-Host "-  Restoring $($_.Directory)..." -ForegroundColor Yellow
-      Push-Location $_.Directory
-      libman restore
-      Pop-Location
+    $restoreNpm = -not ($null -eq (Get-Command npm -ErrorAction SilentlyContinue))
+    $restoreDotnet = -not ($null -eq (Get-Command dotnet -ErrorAction SilentlyContinue))
+    $restoreLibman = -not ($null -eq (Get-Command libman -ErrorAction SilentlyContinue))
+
+    if ($restoreNpm -and ($PSCmdlet.ParameterSetName -eq "Default" -or $PSCmdlet.ParameterSetName -eq "NPM")) {
+      Write-Host "Restoring NPM packages" -NoNewLine
+      $children = Get-ChildItem -Filter package.json -Recurse | Where-Object Directory -NotLike "*node_module*"
+      Write-Host (": Found {0} NPM projects" -f $children.Count) -ForegroundColor Yellow
+      $children | ForEach-Object {
+        Write-Host "-  Restoring $($_.Directory)..." -ForegroundColor Yellow
+        Push-Location $_.Directory
+        if ($PSBoundParameters.ContainsKey("CI")) {
+          Write-Host "Cleaning Slate..."
+          npm ci
+        }
+        else {
+          npm install
+        }
+        Pop-Location
+      }
     }
+
+    if ($restoreDotnet -and ($PSCmdlet.ParameterSetName -eq "Default" -or $PSCmdlet.ParameterSetName -eq "Nuget")) {
+      Write-Host "Restoring NuGet packages"
+      Get-ChildItem -Filter *.*proj -Recurse | ForEach-Object {
+        Write-Host "-  Restoring $($_.Directory)..." -ForegroundColor Yellow
+        Push-Location $_.Directory
+        dotnet restore
+        Pop-Location
+      }
+    }
+
+    if ($restoreLibman -and ($PSCmdlet.ParameterSetName -eq "Default" -or $PSCmdlet.ParameterSetName -eq "Libman")) {
+      Write-Host "Restoring Libman packages"
+      Get-ChildItem -Filter libman.json -Recurse | ForEach-Object {
+        Write-Host "-  Restoring $($_.Directory)..." -ForegroundColor Yellow
+        Push-Location $_.Directory
+        libman restore
+        Pop-Location
+      }
+    }
+
   }
 }
 
