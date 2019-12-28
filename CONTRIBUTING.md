@@ -27,6 +27,20 @@ Fork, then clone the repo:
 
 **All changes should be based from the `vNext` branch.**
 
+- All functions placed in the `src/devtoolbox/Export` folder will be available to the end-user.
+- All functions placed in the `src/devtoolbox/Private` folder will only be available to the module's scripts *not* the end-user.
+
+Please follow these steps to include a new function to the module:
+
+1. Create a new function in the `src/devltoolbox/Export` folder.
+1. Run the `src/UpdateModule.ps1` to update the manifest.<br/>
+Each time this module is run it will automatically bump the version number.<br/>
+A **build** version bump occurs if no new function has been found.<br/>
+A **minor** version bump occurs if a new function has been found.<br/>
+A **major**version bump only occurs when you include the `-Major` switch. (i.e. `.\UpdateManifest -Major`)
+1. If you have previously installed the module, run `src/UninstallModule.ps1`.
+1. Run `src/InstallModule.ps1` to install the module to your local module folder and test your new function.
+
 Push to your fork and [submit a pull request](https://github.com/michaeljolley/devtoolbox/compare/) against the `vNext` branch.
 
 At this point you're waiting on us. We like to at least comment on pull requests
