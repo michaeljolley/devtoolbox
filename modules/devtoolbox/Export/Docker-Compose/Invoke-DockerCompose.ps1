@@ -1,44 +1,14 @@
-Function Get-DockerComposeCommands {
-  param(
-    [string]$Command
-  )
-  $help = $(if ($Command) { docker-compose $Command --help } else { docker-compose --help }) | Select-String -Pattern "^\s{2}\w+" | Where-Object { $_ -notlike "*docker-compose*" }
-  $cmds = @()
-  for ($i = 0; $i -lt $help.Count; $i++) {
-    $cmdline = $help[$i].Line.Trim()
-    $cmds += $cmdline.Substring(0, $cmdline.IndexOf(" "))
-  }
-  return $cmds
-}
-Function Get-DockerComposeServices {
-  param
-  (
-    [Parameter(Mandatory = $true)]
-    [string]$Path
-  )
-  if (-not (Test-Path $Path)) {
-    throw
-  }
-  $file = Get-Content (Convert-Path $Path)
-  $categories = $file | Select-String -Pattern "^\w+:"
-  $service = $categories | Where-Object {$_.Line -like "services:*"}
-  $serviceIdx = $categories.IndexOf($service)
-  $startLine = ($categories[$serviceIdx] | Select-Object -ExpandProperty LineNumber)
-  $endLine = $(if ($serviceIdx -lt $categories.Length - 1) {$categories[$serviceIdx+1] | Select-Object -ExpandProperty LineNumber} else {$file.Count})
-  return $file | Select-Object -Skip $startLine -First ($endLine - $startLine) | Select-String -Pattern "^\s{2}\w+:" | Select-Object @{Name="Service";Expression={$_.Line.Trim().Replace(":","")}} | Sort-Object -Property Service
-}
-Function Invoke-DockerCompose {
+function Invoke-DockerCompose {
   [Alias("dc")]
-  Param
-  (
+  [CmdletBinding()]
+  param (
     [Parameter(Mandatory = $true, Position = 0)]
     [string]$Command,
     [Parameter(Mandatory = $false, ValueFromRemainingArguments = $true)]
     [string[]]$Parameters
   )
 
-  $params = @()
-  $params += $Parameters
+  $params = @($Parameters)
 
   switch ($Command) {
     "b" { docker-compose build @params }
@@ -56,7 +26,7 @@ Function Invoke-DockerCompose {
 
 Register-ArgumentCompleter -CommandName Invoke-DockerCompose -ParameterName Command -ScriptBlock {
   param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
-  $cmds = Get-DockerComposeCommands
+  $cmds = Get-DockerComposeCommand
   return $(if ($wordToComplete) { $cmds | Where-Object { $_ -like "$wordToComplete*" } } else { $cmds })
 }
 
@@ -71,7 +41,7 @@ Register-ArgumentCompleter -CommandName Invoke-DockerCompose -ParameterName Para
       $file = [System.IO.Path]::Combine($__dirname, "docker-compose.yaml")
     }
   }
-  $services = Get-DockerComposeServices -Path $file | Select-Object -ExpandProperty Service
+  $services = Get-DockerComposeService -Path $file | Select-Object -ExpandProperty Service
   if ($wordToComplete) {
     return $services | Where-Object { $_ -like "$wordToComplete*" }
   }
@@ -79,4 +49,3 @@ Register-ArgumentCompleter -CommandName Invoke-DockerCompose -ParameterName Para
     return $services | Where-Object {-not ($commandAst.CommandElements | Select-Object -ExpandProperty Value).Contains($_)}
   }
 }
-
