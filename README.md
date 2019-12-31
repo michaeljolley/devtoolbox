@@ -1,12 +1,22 @@
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/1228996/60140866-b9c3d700-9778-11e9-819b-9e45076a33da.png"/>
+    <img src="https://user-images.githubusercontent.com/1228996/71608160-8fe2d700-2b44-11ea-99fc-a1d5674f74ef.png"/>
 </p>
 
-| Release | vNext | Contributors | Downloads
-| -- | -- | -- | --
-| [![Build Status](https://dev.azure.com/michaeljolley/devtoolbox/_apis/build/status/MichaelJolley.devtools?branchName=master)](https://dev.azure.com/michaeljolley/devtoolbox/_build/latest?definitionId=4&branchName=master) | [![Build Status](https://dev.azure.com/michaeljolley/devtoolbox/_apis/build/status/MichaelJolley.devtools?branchName=vNext)](https://dev.azure.com/michaeljolley/devtoolbox/_build/latest?definitionId=4&branchName=vNext) | [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributing) | [![Downloads](https://img.shields.io/powershellgallery/dt/devtoolbox.svg)](https://www.powershellgallery.com/packages/devtoolbox)
+| Release                                                                                                                                                                                                                      | vNext                                                                                                                                                                                                                      | Contributors                                                                                                       | Downloads                                                                                                                         |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| [![Build Status](https://dev.azure.com/michaeljolley/devtoolbox/_apis/build/status/MichaelJolley.devtools?branchName=master)](https://dev.azure.com/michaeljolley/devtoolbox/_build/latest?definitionId=4&branchName=master) | [![Build Status](https://dev.azure.com/michaeljolley/devtoolbox/_apis/build/status/MichaelJolley.devtools?branchName=vNext)](https://dev.azure.com/michaeljolley/devtoolbox/_build/latest?definitionId=4&branchName=vNext) | [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributing) | [![Downloads](https://img.shields.io/powershellgallery/dt/devtoolbox.svg)](https://www.powershellgallery.com/packages/devtoolbox) |
+
+# What & Why
 
 For more information as to how this repo came about, check out this [blog post](https://michaeljolley.com/posts/setup-command-aliases-in-powershell-to-make-life-easier/)
+
+---
+
+## Installation
+
+The easiest way to install devtoolbox is via the [PowerShell Gallery](https://www.powershellgallery.com/packages/devtoolbox).
+
+---
 
 ## Parameters
 
@@ -20,82 +30,86 @@ g cl https://github.com/MichaelJolley/devtoolbox.git
 git clone https://github.com/MichaelJolley/devtoolbox.git
 ```
 
+---
+
 ## Commands
 
 ### Docker
 
 All aliases for Docker begin with `d`.
 
-| Command   | Executes                      |
-| ---       | ---                           |
-| d b       | docker build                  |
-| d c       | docker container ps           |
-| d cr      | docker container rm           |
-| d cs      | docker container start        |
-| d cx      | docker container stop         |
-| d i       | docker image ls               |
-| d ir      | docker image rm               |
-| d k       | docker kill                   |
-| d l       | docker logs                   |
-| d li      | docker login                  |
-| d lo      | docker logout                 |
-| d r       | docker run                    |
-| d t       | docker image tag              |
-| d p       | docker push                   |
-| d ...     | docker ...(any parameters)    |
+| Command | Executes                   |
+| ------- | -------------------------- |
+| d b     | docker build               |
+| d c     | docker container ps        |
+| d cr    | docker container rm        |
+| d cs    | docker container start     |
+| d cx    | docker container stop      |
+| d i     | docker image ls            |
+| d ir    | docker image rm            |
+| d k     | docker kill                |
+| d l     | docker logs                |
+| d li    | docker login               |
+| d lo    | docker logout              |
+| d r     | docker run                 |
+| d t     | docker image tag           |
+| d p     | docker push                |
+| d ...   | docker ...(any parameters) |
 
 ### Docker-Compose
 
 All aliases for Docker Compose begin with `dc`.
 
-| Command   | Executes                                              |
-| ---       | ---                                                   |
-| dc b      | docker-compose build                                  |
-| dc bu     | docker-compose build (params); docker-compose up      |
-| dc d      | docker-compose down                                   |
-| dc i      | docker-compose images                                 |
-| dc u      | docker-compose up                                     |
-| dc ...    | docker-compose ... (any parameters)                   |
+| Command | Executes                                         |
+| ------- | ------------------------------------------------ |
+| dc b    | docker-compose build                             |
+| dc bu   | docker-compose build (params); docker-compose up |
+| dc d    | docker-compose down                              |
+| dc i    | docker-compose images                            |
+| dc u    | docker-compose up                                |
+| dc ...  | docker-compose ... (any parameters)              |
 
 ### Git
 
 All aliases for Git begin with `g`.
 
-| Command   | Executes                      |
-| ---       | ---                           |
-| g a       | git add                       |
-| g b       | git branch                    |
-| g c       | git checkout                  |
-| g cl      | git clone                     |
-| g co      | git commit                    |
-| g f       | git fetch                     |
-| g i       | git init                      |
-| g l       | git log                       |
-| g ll      | git log --graph (pretty)      |
-| g m       | git merge                     |
-| g pl      | git pull                      |
-| g ps      | git push                      |
-| g r       | git rebase                    |
-| g rs      | git reset                     |
-| g s       | git status                    |
-| g t       | git tag                       |
-| g ...     | git ... (any parameters)      |
+| Command | Executes                 |
+| ------- | ------------------------ |
+| g a     | git add                  |
+| g b     | git branch               |
+| g c     | git checkout             |
+| g cl    | git clone                |
+| g co    | git commit               |
+| g f     | git fetch                |
+| g i     | git init                 |
+| g l     | git log                  |
+| g ll    | git log --graph (pretty) |
+| g m     | git merge                |
+| g pl    | git pull                 |
+| g ps    | git push                 |
+| g r     | git rebase               |
+| g rs    | git reset                |
+| g s     | git status               |
+| g t     | git tag                  |
+| g ...   | git ... (any parameters) |
 
 ### Miscellaneous
 
-| Command                           | Executes
-| ---                               | ---
-| gh                                | Launches browser to GitHub repo if the directory is tracked by Git and its origin url is at GitHub
-| hosts                             | If in Windows, opens the hosts file in an elevated editor. Choosing, in order, between VS Code, VS Code (insiders), Notepad.
-| ~~reload~~                            | ~~Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.~~
-| Restore-WorkspacePackages (rwp)   | Restores NPM, Nuget, and Libman packages starting at the root folder of a workspace.
-| Syntax                            | Prints PowerShell Command Syntax vertically, replicating docs.microsoft.com layout
-| Sort-Reverse                      | Reverses the order of an array. Accepts pipeline support e.g. `1,2,3,4,5 | Sort-Reverse`
-| p `<dirname>`                   | Changes your current directory to the directory of the project you provide. It will search the root directory (or the current directory if no root directory is set in the environment variables) recursively for the project directory you provided.
+| Command                         | Executes                                                                                                                                                                                                                                              |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| gh                              | Launches browser to GitHub repo if the directory is tracked by Git and its origin url is at GitHub                                                                                                                                                    |
+| hosts                           | If in Windows, opens the hosts file in an elevated editor. Choosing, in order, between VS Code, VS Code (insiders), Notepad.                                                                                                                          |
+| ~~reload~~                      | ~~Restarts PowerShell in-place. Useful in the event you have added something to the path or user profile script and need a powershell restart in order for it to be recognized.~~                                                                     |
+| Restore-WorkspacePackages (rwp) | Restores NPM, Nuget, and Libman packages starting at the root folder of a workspace.                                                                                                                                                                  |
+| Syntax                          | Prints PowerShell Command Syntax vertically, replicating docs.microsoft.com layout                                                                                                                                                                    |
+| Sort-Reverse                    | Reverses the order of an array. Accepts pipeline support e.g. `1,2,3,4,5 | Sort-Reverse`                                                                                                                                                              |
+| p `<dirname>`                   | Changes your current directory to the directory of the project you provide. It will search the root directory (or the current directory if no root directory is set in the environment variables) recursively for the project directory you provided. |
+
+---
 
 ## Contributing
 
-Want to contribute? Check out our [Code of Conduct](CODE_OF_CONDUCT.md) and [Contributing](CONTRIBUTING.md) docs. This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification.  Contributions of any kind welcome!
+Want to contribute? Check out our [Code of Conduct](CODE_OF_CONDUCT.md) and [Contributing](CONTRIBUTING.md) docs. This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
