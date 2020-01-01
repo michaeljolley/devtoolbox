@@ -4,25 +4,8 @@ param
   [Parameter(Mandatory = $true, Position = 0)]
   [System.IO.DirectoryInfo]
   [string]
-  $ModulePath,
-  [Parameter(Mandatory = $false)]
-  [switch]
-  $Major
+  $ModulePath
 )
-
-function GetVersionInfo ($version, $type) {
-  switch ($type) {
-    "Major" {
-      return "$($version.Major + 1).0.0"
-    }
-    "Minor" {
-      return "$($version.Major).$($version.Minor + 1).0"
-    }
-    "Build" {
-      return "$($version.Major).$($version.Minor).$($version.Build + 1)"
-    }
-  }
-}
 
 function GetFunctionAliases ($functions) {
   $aliases = @()
@@ -52,24 +35,10 @@ $functionsToExport = Get-ChildItem *.ps1 -Path Export -Recurse | `
   Select-Object -ExpandProperty BaseName | `
   Sort-Object
 
-# We are requesting a major bump
-if ($Major.IsPresent) {
-  $version = GetVersionInfo $currentMetadata.Version "Major"
-}
-# There are new functions added to the module, bump the minor
-elseif ($functionsToExport.Count -gt $currentMetadata.ExportedCommands.Count) {
-  $version = GetVersionInfo $currentMetadata.Version "Minor"
-}
-# No new functions were added so we assume we should bump the build
-else {
-  $version = GetVersionInfo $currentMetadata.Version "Build"
-}
-
 Update-ModuleManifest -Path "$ModulePath.psd1" `
   -RootModule "$ModulePath.psm1" `
   -FunctionsToExport $functionsToExport `
-  -AliasesToExport (GetFunctionAliases $functionsToExport) `
-  -ModuleVersion $version
+  -AliasesToExport (GetFunctionAliases $functionsToExport)
 
 Test-ModuleManifest -Path "$ModulePath.psd1"
 

@@ -33,11 +33,7 @@ Fork, then clone the repo:
 Please follow these steps to include a new function to the module:
 
 1. Create a new function in the `src/devltoolbox/Export` folder.
-1. Run the `src/UpdateModule.ps1` to update the manifest.<br/>
-Each time this module is run it will automatically bump the version number.<br/>
-A **build** version bump occurs if no new function has been found.<br/>
-A **minor** version bump occurs if a new function has been found.<br/>
-A **major**version bump only occurs when you include the `-Major` switch. (i.e. `.\UpdateManifest -Major`)
+1. Run the `src/UpdateModule.ps1` to update the manifest.
 1. If you have previously installed the module, run `src/UninstallModule.ps1`.
 1. Run `src/InstallModule.ps1` to install the module to your local module folder and test your new function.
 
