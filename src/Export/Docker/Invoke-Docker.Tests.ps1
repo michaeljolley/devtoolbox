@@ -13,118 +13,33 @@ Describe "Testing aliases used by Invoke-Docker" {
     $Script:cmd = ($c -join " ").Trim()
   }
 
-  It "A 'b' command should call 'docker build'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-    
-    Invoke-Docker -Command b
-
-    $cmd | Should -Be "build"
+  # Setup theories
+  $aliases = @{
+    "b" = "build"
+    "c" = "container"
+    "cs" = "container start"
+    "cx" = "container stop"
+    "i" = "images"
+    "t" = "tag"
+    "k" = "kill"
+    "l" = "logs"
+    "li" = "login"
+    "lo" = "logout"
+    "r" = "run"
+    "rmc" = "container rm"
+    "p" = "push"
+    "v" = "volume"
   }
-  It "A 'c' command should call 'docker container'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
 
-    Invoke-Docker -Command c
-
-    $cmd | Should -Be "container"
+  # Test the theories
+  $aliases.Keys | ForEach-Object {
+    It "A '$_' command should call '$($aliases[$_])'" {
+      $Script:cmd = ""
+      Mock -CommandName "docker" -MockWith $getParams
+      Invoke-Docker -Command $_
+      $cmd | Should -Be ($aliases[$_])
+    }
   }
-  It "A 'cs' command should call 'docker container start'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-
-    Invoke-Docker -Command cs
-
-    $cmd | Should -Be "container start"
-  }
-  It "A 'cx' command should call 'docker container stop'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-
-    Invoke-Docker -Command cx
-
-    $cmd | Should -Be "container stop"
-  }
-  It "A 'i' command should call 'docker images'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-
-    Invoke-Docker -Command i
-
-    $cmd | Should -Be "images"
-  }
-  It "A 't' command should call 'docker tag'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-
-    Invoke-Docker -Command t
-
-    $cmd | Should -Be "tag"
-  }
-  It "A 'k' command should call 'docker kill'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-
-    Invoke-Docker -Command k
-
-    $cmd | Should -Be "kill"
-  }
-  It "A 'l' command should call 'docker logs'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-
-    Invoke-Docker -Command l
-
-    $cmd | Should -Be "logs"
-  }
-  It "A 'li' command should call 'docker login'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-
-    Invoke-Docker -Command li
-
-    $cmd | Should -Be "login"
-  }
-  It "A 'lo' command should call 'docker logout'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-
-    Invoke-Docker -Command lo
-
-    $cmd | Should -Be "logout"
-  }
-  It "A 'r' command should call 'docker run'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-
-    Invoke-Docker -Command r
-
-    $cmd | Should -Be "run"
-  }
-  It "A 'rmc' command should call 'docker container rm'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-
-    Invoke-Docker -Command rmc
-
-    $cmd | Should -Be "container rm"
-  }
-  It "A 'p' command should call 'docker push'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-
-    Invoke-Docker -Command p
-
-    $cmd | Should -Be "push"
-  }
-  It "A 'v' command should call 'docker volume'" {
-    $Script:cmd = ""
-    Mock -CommandName "docker.exe" -MockWith $getParams
-
-    Invoke-Docker -Command v
-
-    $cmd | Should -Be "volume"
-  }  
 }
 
 Describe "Testing command tab completions for Invoke-Docker" {
@@ -150,7 +65,7 @@ Describe "Testing command tab completions for Invoke-Docker" {
     "stop","tag","top","unpause","update","version","wait"
     ) | ForEach-Object {
     It "tab completion should contain '$_'" {
-      Mock -CommandName "docker.exe" -MockWith { return (Get-Content "$here\mocks\dockerHelp.txt") }
+      Mock -CommandName "docker" -MockWith { return (Get-Content "$here\mocks\dockerHelp.txt") }
       $sut = Get-Completions "Invoke-Docker "
       $sut.CompletionMatches.CompletionText | Should -Contain $_
     }
@@ -177,7 +92,7 @@ Describe "Testing subcommand tab completions for Invoke-Docker" {
     "pull","push","rm","save","tag"
   ) | ForEach-Object {
     It "'image' subcommand tab completion should contain '$_'" {
-      Mock -CommandName "docker.exe" -MockWith { return (Get-Content "$here\mocks\dockerImageHelp.txt") }
+      Mock -CommandName "docker" -MockWith { return (Get-Content "$here\mocks\dockerImageHelp.txt") }
       $sut = Get-Completions "Invoke-Docker image "
       $sut.CompletionMatches.CompletionText | Should -Contain "$_"
     }
@@ -189,6 +104,7 @@ Describe "Testing subcommand tab completions for Invoke-Docker" {
     $sut = Get-Completions "Invoke-Docker rmi "
     $sut.CompletionMatches.CompletionText | Should -Contain "microsoft/powershell:latest"
   }
+  
   It "'rm' subcommand tab completion should return 'stoic_pare'" {
     Mock -CommandName "Invoke-DockerCommand" -ParameterFilter { $Parameters.Contains("ps") } -MockWith { return (Get-Content "$here\mocks\dockerContainers.txt") }
     Mock -CommandName "Invoke-DockerCommand" -ParameterFilter { $Parameters.Contains("inspect") } -MockWith { return (Get-Content "$here\mocks\dockerContainersJson.txt") }
