@@ -1,5 +1,5 @@
-$Export = @(Get-ChildItem -Path $PSScriptRoot\Export -Filter *.ps1 -Recurse -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private -Filter *.ps1 -Recurse -ErrorAction SilentlyContinue)
+$Export = @(Get-ChildItem -Path $PSScriptRoot\Export -Filter *.ps1 -Exclude *.Tests.ps1 -Recurse -ErrorAction SilentlyContinue)
+$Private = @(Get-ChildItem -Path $PSScriptRoot\Private -Filter *.ps1 -Exclude *.Tests.ps1 -Recurse -ErrorAction SilentlyContinue)
 
 foreach ($import in @($Private + $Export)) {
   try {

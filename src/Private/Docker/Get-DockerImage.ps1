@@ -31,25 +31,28 @@ function Get-DockerImage {
 
   PROCESS {
     if (-not [string]::IsNullOrWhiteSpace($Image)) {
-      $ImagesToProcess += docker image inspect $Image | ConvertFrom-Json
+      $ImagesToProcess += Invoke-DockerCommand image inspect $Image | ConvertFrom-Json
     }
     else {
       $params = @("image","ls")  
       if ($All) {
         $params += "-a"
       }
-      $imageIds = (docker @params | Select-String -Pattern "[\d|\w]{12}").Matches.Groups.Value
-      $ImagesToProcess = docker image inspect $imageIds | ConvertFrom-Json
+      $imageIds = (Invoke-DockerCommand @params | Select-String -Pattern "\s[\d|\w]{12}").Matches.Groups.Value.Trim()
+      $ImagesToProcess = Invoke-DockerCommand image inspect $imageIds | ConvertFrom-Json
     }
   }
 
   END {    
     foreach ($i in $ImagesToProcess) {
+      $repo = $(if ($i.RepoTags.Length -gt 0) { $i.RepoTags[0].Split(":")[0] } else { "<None>" })
+      $tag = $(if ($i.RepoTags.Length -gt 0) { $i.RepoTags[0].Split(":")[1] } else { "<None>" })
+      $imgid = $(if ($NoTrunc.IsPresent) {$i.Id} else {$i.Id.Substring(7,12)})
       [PSCustomObject]@{
         PSTypeName = "Docker.Image"
-        Repository = $i.RepoTags[0].Split(":")[0]
-        Tag = $i.RepoTags[0].Split(":")[1]
-        "Image Id" = $(if ($NoTrunc.IsPresent) {$i.Id} else {$i.Id.Substring(7,12)})
+        Repository = $repo
+        Tag = $tag
+        "Image Id" = $imgid
         "Parent Id" = $(if ($NoTrunc.IsPresent) {$i.Parent} else {if($i.Parent -ne "") {$i.Parent.Substring(7,12)}})
         Created = [DateTime]::Parse($i.Created)
         Size = "$([Math]::Round($i.Size/1000/1000,0,[System.MidpointRounding]::AwayFromZero))MB"
@@ -60,6 +63,7 @@ function Get-DockerImage {
         Entrypoint = $i.Config.Entrypoint
         ExposedPorts = $i.Config.ExposedPorts.PSObject.Properties.Name
         User = $i.Config.User
+        Name = $(if ($repo -ne "<None>" -and $tag -ne "<None>") { "$($repo):$($tag)" } else { $imgid })
       }
     }
   }

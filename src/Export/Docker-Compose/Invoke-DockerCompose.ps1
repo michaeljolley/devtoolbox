@@ -26,8 +26,7 @@ function Invoke-DockerCompose {
 
 Register-ArgumentCompleter -CommandName Invoke-DockerCompose -ParameterName Command -ScriptBlock {
   param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameters)
-  $cmds = Get-DockerComposeCommand
-  return $(if ($wordToComplete) { $cmds | Where-Object { $_ -like "$wordToComplete*" } } else { $cmds })
+  Get-DockerComposeCommand | Where-Object { $_ -like "$wordToComplete*" }
 }
 
 Register-ArgumentCompleter -CommandName Invoke-DockerCompose -ParameterName Parameters -ScriptBlock {
