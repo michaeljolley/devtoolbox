@@ -35,7 +35,8 @@
       "contributions": [
         "code",
         "ideas",
-        "doc"
+        "doc",
+        "test"
       ]
     },
     {
@@ -80,8 +81,9 @@
     }
   ],
   "contributorsPerLine": 7,
-  "projectName": "ps-alias",
+  "projectName": "devtoolbox",
   "projectOwner": "MichaelJolley",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
