@@ -24,5 +24,8 @@ steps:
 #    testRunner: NUnit
 #    searchFolder: '$(Common.TestResultsDirectory)'
 
-- powershell: Publish-Module -Path "$(Build.Repository.LocalPath)/src/devtoolbox" -NuGetApiKey $(NugetAPIKey)
+- powershell: . "$(Build.Repository.LocalPath)/_build/build.ps1"
+  displayName: 'Build the dist folder for publishing'
+
+- powershell: Publish-Module -Path "$(Build.Repository.LocalPath)/dist" -NuGetApiKey $(NugetAPIKey)
   displayName: 'Publish PowerShell Module'

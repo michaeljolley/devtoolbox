@@ -20,15 +20,15 @@ function Get-DockerContainer {
 
   PROCESS {
     if (-not [string]::IsNullOrWhiteSpace($Container)) {
-      $ContainersToProcess += docker container inspect $Container | ConvertFrom-Json
+      $ContainersToProcess += Invoke-DockerCommand container inspect $Container | ConvertFrom-Json
     }
     else {
-      $params = @("container","ls")
+      $params = @("container","ps")
       if ($All.IsPresent) {
         $params += "-a"
       }
-      $containerIds = (docker @params | Select-String -Pattern "^[\d|\w]{12}").Matches.Groups.Value
-      $ContainersToProcess = docker container inspect -s $containerIds | ConvertFrom-Json
+      $containerIds = (Invoke-DockerCommand @params | Select-String -Pattern "^[\d|\w]{12}").Matches.Groups.Value
+      $ContainersToProcess = Invoke-DockerCommand container inspect -s $containerIds | ConvertFrom-Json
     }
   }
 
