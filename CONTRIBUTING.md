@@ -33,7 +33,7 @@ At this point you're waiting on us. We like to at least comment on pull requests
 within three days (and, typically, one day). We may suggest
 some changes or improvements or alternatives.
 
-Normally reviews & merging occur live on stream at [https://twitch.tv/themichaeljolley](https://twitch.tv/themichaeljolley).
+Normally reviews & merging occur live on stream at [https://twitch.tv/baldbeardedbuilder](https://twitch.tv/baldbeardedbuilder).
 
 Some things that will increase the chance that your pull request is accepted:
 
