@@ -93,6 +93,31 @@ All aliases for Git begin with `g`.
 | g t     | git tag                  |
 | g ...   | git ... (any parameters) |
 
+### Dotnet
+
+All aliases for the Dotnet CLI begin with `dn`
+
+| Command | Executes              |
+| ------- | --------------------- |
+| a       | dotnet add            |
+| apack   | dotnet add package    |
+| aproj   | dotnet add project    |
+| b       | dotnet build          |
+| cl      | dotnet clean          |
+| h       | dotnet help           |
+| ls      | dotnet list           |
+| lspack  | dotnet list package   |
+| lsref   | dotnet list reference |
+| n       | dotnet new            |
+| nu      | dotnet nuget          |
+| rm      | dotnet remove         |
+| rmpack  | dotnet remove package |
+| re      | dotnet restore        |
+| r       | dotnet run            |
+| s       | dotnet sln            |
+| t       | dotnet test           |
+| default | dotnet help           |
+
 ### Miscellaneous
 
 | Command                         | Executes                                                                                                                                                                                                                                              |

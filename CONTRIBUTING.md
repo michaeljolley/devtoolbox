@@ -37,7 +37,7 @@ Please follow these steps to include a new function to the module:
 1. If you have previously installed the module, run `src/UninstallModule.ps1`.
 1. Run `src/InstallModule.ps1` to install the module to your local module folder and test your new function.
 
-Push to your fork and [submit a pull request](https://github.com/michaeljolley/devtoolbox/compare/) against the `vNext` branch.
+Push to your fork and [submit a pull request](https://github.com/builders-club/devtoolbox/compare/) against the `vNext` branch.
 
 At this point you're waiting on us. We like to at least comment on pull requests
 within three days (and, typically, one day). We may suggest
