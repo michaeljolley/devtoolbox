@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Updated README to provide installation instructions from the repository
 - Added GitHub Actions to provide maintenance of the repository
+- Added Dotnet CLI commands/test.
+- Added some pathing fixes for Mac OS in the install/uninstall modules.
 
 ## [0.6.0]
 
