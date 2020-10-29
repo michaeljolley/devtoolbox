@@ -65,35 +65,14 @@
     # Format files (.ps1xml) to be loaded when importing this module
     # FormatsToProcess = @()
 
-    # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-    NestedModules     = @(
-        './functions/Docker.psm1',
-        './functions/DockerCompose.psm1',
-        './functions/Git.psm1',
-        './functions/GitHub.psm1',
-        './functions/HelperFunctions.psm1',
-        './functions/GotoDevProject.psm1',
-        './functions/ReloadEnv.psm1'
-    )
+# Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
+NestedModules = @()
 
-    # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport = @(
-        'Invoke-Docker',
-        'Invoke-DockerCompose',
-        'Invoke-Git'
-        'Invoke-GitHubRepository',
-        'Restore-WorkspacePackages',
-        'Get-Syntax',
-        'Invoke-ReverseSort',
-        'Edit-HostsFile',
-        'Invoke-PowerShell',
-        'Restart-PowerShell',
-        'Test-PSHostHasAdministrator',
-        'Restart-PSHost',
-        'Out-Menu',
-        'Invoke-GotoDevProject'
-        'Invoke-ReloadEnvironment'
-    )
+# Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
+FunctionsToExport = 'Edit-HostsFile', 'Get-Syntax', 'Invoke-Docker', 'Invoke-DockerCompose', 
+               'Invoke-Git', 'Invoke-GitHubRepository', 'Invoke-ReloadEnvironment', 
+               'Invoke-ReverseSort', 'Out-Menu', 'Restart-PSHost', 
+               'Restore-WorkspacePackages', 'Test-PSHostHasAdministrator'
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
     CmdletsToExport   = @()
@@ -101,21 +80,8 @@
     # Variables to export from this module
     VariablesToExport = '*'
 
-    # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-    AliasesToExport   = @(
-        'd',
-        'dc',
-        'g',
-        'gh',
-        'hosts',
-        'IsAdmin',
-        'reload',
-        'rwp',
-        'Sort-Reverse',
-        'Syntax',
-        'p',
-        'proj'
-    )
+# Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
+AliasesToExport = 'hosts', 'Syntax', 'd', 'dc', 'g', 'gh', 'reload', 'menu', 'rwp', 'IsAdmin'
 
     # DSC resources to export from this module
     # DscResourcesToExport = @()
@@ -129,32 +95,40 @@
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
     PrivateData       = @{
 
-        PSData = @{
+    PSData = @{
 
-            # Tags applied to this module. These help with module discovery in online galleries.
-            Tags       = @('docker', 'git', 'docker-compose', 'alias')
+        # Tags applied to this module. These help with module discovery in online galleries.
+        Tags = 'docker','git','docker-compose','alias'
 
-            # A URL to the license for this module.
-            LicenseUri = 'https://github.com/MichaelJolley/devtoolbox/blob/master/LICENSE'
+        # A URL to the license for this module.
+        LicenseUri = 'https://github.com/builders-club/devtoolbox/blob/master/LICENSE'
 
-            # A URL to the main website for this project.
-            ProjectUri = 'https://github.com/MichaelJolley/devtoolbox'
+        # A URL to the main website for this project.
+        ProjectUri = 'https://github.com/builders-club/devtoolbox'
 
-            # A URL to an icon representing this module.
-            IconUri    = 'https://user-images.githubusercontent.com/1228996/60137349-4025ec00-976c-11e9-82f1-db6f8e1a3af8.png'
+        # A URL to an icon representing this module.
+        IconUri = 'https://user-images.githubusercontent.com/1228996/60137349-4025ec00-976c-11e9-82f1-db6f8e1a3af8.png'
 
-            # ReleaseNotes of this module
-            # ReleaseNotes = ''
+        # ReleaseNotes of this module
+        # ReleaseNotes = ''
 
-        } # End of PSData hashtable
+        # Prerelease string of this module
+        # Prerelease = ''
 
-    } # End of PrivateData hashtable
+        # Flag to indicate whether the module requires explicit user acceptance for install/update/save
+        # RequireLicenseAcceptance = $false
 
-    # HelpInfo URI of this module
-    HelpInfoURI       = 'https://github.com/MichaelJolley/devtoolbox/issues'
+        # External dependent modules of this module
+        # ExternalModuleDependencies = @()
 
-    # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
-    # DefaultCommandPrefix = ''
+    } # End of PSData hashtable
+
+ } # End of PrivateData hashtable
+
+# HelpInfo URI of this module
+HelpInfoURI = 'https://github.com/builders-club/devtoolbox/issues'
+
+# Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
+# DefaultCommandPrefix = ''
 
 }
-

@@ -1,0 +1,2 @@
+CONTAINER ID        IMAGE                  COMMAND             CREATED             STATUS                      PORTS               NAMES
+b0f701f6fb3c        microsoft/powershell   "pwsh"              21 seconds ago      Exited (0) 19 seconds ago                       stoic_pare

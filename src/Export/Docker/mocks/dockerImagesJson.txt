@@ -1,0 +1,133 @@
+[
+    {
+        "Id": "sha256:10749ad42dfbd7a3da21453eea1b948587264e22b22df4dac7531d7e76097f6f",
+        "RepoTags": [
+            "microsoft/powershell:latest"
+        ],
+        "RepoDigests": [
+            "microsoft/powershell@sha256:4e1dbf077c4b73a94255f5536133bafbb2a0bdca3e90510a8512bbc90a6defad"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2019-12-13T19:22:52.510088746Z",
+        "Container": "5715ff2c591915c23e9dcc9c07ca13c240db4020e498acad3c4751f0c08e43f4",
+        "ContainerConfig": {
+            "Hostname": "5715ff2c5919",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false",
+                "LC_ALL=en_US.UTF-8",
+                "LANG=en_US.UTF-8",
+                "PSModuleAnalysisCachePath=/var/cache/microsoft/powershell/PSModuleAnalysisCache/ModuleAnalysisCache"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "CMD [\"pwsh\"]"
+            ],
+            "Image": "sha256:0f49c4e4af3960e8a28e407d0b8a2975ae47ec6d236cc100ae2d5f3172a04731",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "description": "This Dockerfile will install the latest release of PowerShell.",
+                "maintainer": "PowerShell Team <powershellteam@hotmail.com>",
+                "org.label-schema.docker.cmd": "docker run mcr.microsoft.com/v6.2.3/powershell:6.2.3-ubuntu-bionic pwsh -c ''",
+                "org.label-schema.docker.cmd.devel": "docker run mcr.microsoft.com/v6.2.3/powershell:6.2.3-ubuntu-bionic",
+                "org.label-schema.docker.cmd.help": "docker run mcr.microsoft.com/v6.2.3/powershell:6.2.3-ubuntu-bionic pwsh -c Get-Help",
+                "org.label-schema.docker.cmd.test": "docker run mcr.microsoft.com/v6.2.3/powershell:6.2.3-ubuntu-bionic pwsh -c Invoke-Pester",
+                "org.label-schema.name": "powershell",
+                "org.label-schema.schema-version": "1.0",
+                "org.label-schema.url": "https://github.com/PowerShell/PowerShell/blob/master/docker/README.md",
+                "org.label-schema.usage": "https://github.com/PowerShell/PowerShell/tree/master/docker#run-the-docker-image-you-built",
+                "org.label-schema.vcs-ref": "626638a",
+                "org.label-schema.vcs-url": "https://github.com/PowerShell/PowerShell-Docker",
+                "org.label-schema.vendor": "PowerShell",
+                "org.label-schema.version": "6.2.3",
+                "readme.md": "https://github.com/PowerShell/PowerShell/blob/master/docker/README.md"
+            }
+        },
+        "DockerVersion": "3.0.8",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false",
+                "LC_ALL=en_US.UTF-8",
+                "LANG=en_US.UTF-8",
+                "PSModuleAnalysisCachePath=/var/cache/microsoft/powershell/PSModuleAnalysisCache/ModuleAnalysisCache"
+            ],
+            "Cmd": [
+                "pwsh"
+            ],
+            "Image": "sha256:0f49c4e4af3960e8a28e407d0b8a2975ae47ec6d236cc100ae2d5f3172a04731",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "description": "This Dockerfile will install the latest release of PowerShell.",
+                "maintainer": "PowerShell Team <powershellteam@hotmail.com>",
+                "org.label-schema.docker.cmd": "docker run mcr.microsoft.com/v6.2.3/powershell:6.2.3-ubuntu-bionic pwsh -c ''",
+                "org.label-schema.docker.cmd.devel": "docker run mcr.microsoft.com/v6.2.3/powershell:6.2.3-ubuntu-bionic",
+                "org.label-schema.docker.cmd.help": "docker run mcr.microsoft.com/v6.2.3/powershell:6.2.3-ubuntu-bionic pwsh -c Get-Help",
+                "org.label-schema.docker.cmd.test": "docker run mcr.microsoft.com/v6.2.3/powershell:6.2.3-ubuntu-bionic pwsh -c Invoke-Pester",
+                "org.label-schema.name": "powershell",
+                "org.label-schema.schema-version": "1.0",
+                "org.label-schema.url": "https://github.com/PowerShell/PowerShell/blob/master/docker/README.md",
+                "org.label-schema.usage": "https://github.com/PowerShell/PowerShell/tree/master/docker#run-the-docker-image-you-built",
+                "org.label-schema.vcs-ref": "626638a",
+                "org.label-schema.vcs-url": "https://github.com/PowerShell/PowerShell-Docker",
+                "org.label-schema.vendor": "PowerShell",
+                "org.label-schema.version": "6.2.3",
+                "readme.md": "https://github.com/PowerShell/PowerShell/blob/master/docker/README.md"
+            }
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 339472717,
+        "VirtualSize": 339472717,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/1fe046f0620ba52596b5b5973b47dc098953ec883153d8fb192af4e903917049/diff:/var/lib/docker/overlay2/f489f298bb975572e7cb75b809014f807b6fa4b0907c9ba59e3d9fdb2a3ecaa4/diff:/var/lib/docker/overlay2/f6cc243e14b4a371c0530480cfc5c86c17e8ede42fb584305f953d197741b0fe/diff:/var/lib/docker/overlay2/3c371cc924f016e3d7970aa31614ba7d4d35ab5d3997889ff26d7463958816f1/diff:/var/lib/docker/overlay2/01cd856f79586aa3e2aba46bc3ee815cc5c0f38b6937211120083d990d9bf936/diff",
+                "MergedDir": "/var/lib/docker/overlay2/0a5b19553d9a59d618592cbbabba873426335e52de8d7220d7cf357d51b0748b/merged",
+                "UpperDir": "/var/lib/docker/overlay2/0a5b19553d9a59d618592cbbabba873426335e52de8d7220d7cf357d51b0748b/diff",
+                "WorkDir": "/var/lib/docker/overlay2/0a5b19553d9a59d618592cbbabba873426335e52de8d7220d7cf357d51b0748b/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:cc967c529ced563b7746b663d98248bc571afdb3c012019d7f54d6c092793b8b",
+                "sha256:2c6ac8e5063e35e91ab79dfb7330c6154b82f3a7e4724fb1b4475c0a95dfdd33",
+                "sha256:6c01b5a53aac53c66f02ea711295c7586061cbe083b110d54dafbeb6cf7636bf",
+                "sha256:e0b3afb09dc386786d49d6443bdfb20bc74d77dcf68e152db7e5bb36b1cca638",
+                "sha256:4b60ab6ecf7dbe1b1fcd472ef9d1927a7f885ea555036caef778180faadea3a0",
+                "sha256:5da2f9992c8544d7ef5bc5a95ab542cabc30c61df3a612789605ebb5005c3983"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]

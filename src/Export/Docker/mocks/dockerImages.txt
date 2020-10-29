@@ -1,0 +1,2 @@
+REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
+microsoft/powershell   latest              10749ad42dfb        2 weeks ago         339MB
