@@ -43,9 +43,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New `gh` command that launches browser to GitHub repo if the directory is a GitHub repo
 - Tons :)
 
-[Unreleased]: https://github.com/michaeljolley/devtools/compare/[0.6.2]...HEAD
-[0.6.2]: https://github.com/michaeljolley/devtools/compare/[0.6.0]...[0.6.2]
-[0.6.0]: https://github.com/michaeljolley/devtools/compare/[0.5.0]...[0.6.0]
-[0.5.0]: https://github.com/michaeljolley/devtools/compare/[0.0.4]...[0.5.0]
-[0.0.5]: https://github.com/michaeljolley/devtools/compare/[0.0.5]...[0.0.5]
-[0.0.4]: https://github.com/michaeljolley/devtools/compare/4a9f707...[0.0.4]
+[Unreleased]: https://github.com/builders-club/devtools/compare/[0.6.2]...HEAD
+[0.6.2]: https://github.com/builders-club/devtools/compare/[0.6.0]...[0.6.2]
+[0.6.0]: https://github.com/builders-club/devtools/compare/[0.5.0]...[0.6.0]
+[0.5.0]: https://github.com/builders-club/devtools/compare/[0.0.4]...[0.5.0]
+[0.0.5]: https://github.com/builders-club/devtools/compare/[0.0.5]...[0.0.5]
+[0.0.4]: https://github.com/builders-club/devtools/compare/4a9f707...[0.0.4]

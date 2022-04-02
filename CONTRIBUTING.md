@@ -33,11 +33,11 @@ Fork, then clone the repo:
 Please follow these steps to include a new function to the module:
 
 1. Create a new function in the `src/devltoolbox/Export` folder.
-1. Run the `src/UpdateModule.ps1` to update the manifest.
-1. If you have previously installed the module, run `src/UninstallModule.ps1`.
-1. Run `src/InstallModule.ps1` to install the module to your local module folder and test your new function.
+1. Run the `/UpdateManifest.ps1` to update the manifest.
+1. If you have previously installed the module, run `/UninstallModule.ps1`.
+1. Run `/InstallModule.ps1` to install the module to your local module folder and test your new function.
 
-Push to your fork and [submit a pull request](https://github.com/michaeljolley/devtoolbox/compare/) against the `vNext` branch.
+Push to your fork and [submit a pull request](https://github.com/builders-club/devtoolbox/compare/) against the `vNext` branch.
 
 At this point you're waiting on us. We like to at least comment on pull requests
 within three days (and, typically, one day). We may suggest
@@ -47,8 +47,8 @@ Normally reviews & merging occur live on stream at [https://twitch.tv/baldbearde
 
 Some things that will increase the chance that your pull request is accepted:
 
-* **Update [README][readme] with any needed changes**
-* Update [CHANGELOG](CHANGELOG.md) with any changes
-* Write a [good commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
+- **Update [README][readme] with any needed changes**
+- Update [CHANGELOG](CHANGELOG.md) with any changes
+- Write a [good commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
 
 [readme]: README.md

@@ -27,7 +27,7 @@
     # CompanyName = 'Unknown'
 
     # Copyright statement for this module
-    Copyright         = '2019 Michael Jolley. All rights reserved.'
+    Copyright         = '2019 Bald Bearded Builder LLC. All rights reserved.'
 
     # Description of the functionality provided by this module
     Description       = 'A PowerShell module that enables software developers to speed up their CLI workflow.'
