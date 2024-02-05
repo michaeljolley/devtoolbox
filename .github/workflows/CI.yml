@@ -17,7 +17,7 @@ jobs:
       - name: Build module
         shell: pwsh
         run: |
-          . "$(Build.Repository.LocalPath)/_build/build.ps1"
+          . "./_build/build.ps1"
 
   deploy:
     needs: build
@@ -28,4 +28,4 @@ jobs:
           PS_GALLERY_API_KEY: ${{ secrets.PS_GALLERY_API_KEY }}
         shell: pwsh
         run: |
-          Publish-Module -Path "$(Build.Repository.LocalPath)/dist" -NuGetApiKey $(PS_GALLERY_API_KEY)
+          Publish-Module -Path "./dist" -NuGetApiKey $(PS_GALLERY_API_KEY)
