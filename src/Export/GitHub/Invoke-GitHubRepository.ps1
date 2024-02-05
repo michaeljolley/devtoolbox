@@ -1,5 +1,5 @@
 Function Invoke-GitHubRepository {
-  [Alias('gh')]
+  [Alias('github')]
   Param(
     # Browse the branch
     [Parameter()]

@@ -25,23 +25,21 @@ Fork, then clone the repo:
 
     git clone git@github.com:your-username/ps-alias.git
 
-**All changes should be based from the `vNext` branch.**
-
 - All functions placed in the `src/devtoolbox/Export` folder will be available to the end-user.
 - All functions placed in the `src/devtoolbox/Private` folder will only be available to the module's scripts *not* the end-user.
 
 Please follow these steps to include a new function to the module:
 
-1. Create a new function in the `src/devltoolbox/Export` folder.
+1. Create a new function in the `src/devltoolbox/export` folder.
 1. Run the `/UpdateManifest.ps1` to update the manifest.
 1. If you have previously installed the module, run `/UninstallModule.ps1`.
 1. Run `/InstallModule.ps1` to install the module to your local module folder and test your new function.
 
-Push to your fork and [submit a pull request](https://github.com/builders-club/devtoolbox/compare/) against the `vNext` branch.
+Push to your fork and [submit a pull request](https://github.com/michaeljolley/devtoolbox/compare/).
 
 At this point you're waiting on us. We like to at least comment on pull requests
-within three days (and, typically, one day). We may suggest
-some changes or improvements or alternatives.
+within three days (and, typically, one day). We may suggest some changes or
+improvements or alternatives.
 
 Normally reviews & merging occur live on stream at [https://twitch.tv/baldbeardedbuilder](https://twitch.tv/baldbeardedbuilder).
 
