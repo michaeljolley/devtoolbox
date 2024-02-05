@@ -6,3 +6,4 @@ Get-ChildItem -Path $src -Exclude *.Tests.ps1 -Recurse | Where-Object FullName -
   $destination = $_.FullName -replace "\\src", "\dist"
   Copy-Item -Path $_.FullName -Destination $destination -Force
 }
+Write-Line "Build complete."
