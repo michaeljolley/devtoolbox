@@ -28,4 +28,4 @@ jobs:
           PS_GALLERY_API_KEY: ${{ secrets.PS_GALLERY_API_KEY }}
         shell: pwsh
         run: |
-          Publish-Module -Path "./dist" -NuGetApiKey $(PS_GALLERY_API_KEY)
+          Publish-Module -Path "./dist" -NuGetApiKey $env:PS_GALLERY_API_KEY
