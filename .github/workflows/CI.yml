@@ -42,4 +42,4 @@ jobs:
       - name: Deploy to PowerShell Gallery
         shell: pwsh
         run: |
-          Publish-Module -Path "$(env:GITHUB_WORKSPACE)/dist" -NuGetApiKey $env:PS_GALLERY_API_KEY
+          Publish-Module -Path $env:GITHUB_WORKSPACE/dist -NuGetApiKey $env:PS_GALLERY_API_KEY
