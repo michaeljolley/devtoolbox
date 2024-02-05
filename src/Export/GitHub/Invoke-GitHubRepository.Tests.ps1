@@ -54,10 +54,10 @@ Describe("Invoke-GitHubRepository") {
 
   It("Should throw if branch doesn't exist") {
     Mock -CommandName "git" -ParameterFilter { $PassThruArgs[0] -eq "config" } -MockWith { return $repoUrl }
-    Mock -CommandName "git" -ParameterFilter { $PassThruArgs[0] -eq "branch" -and $PassThruArgs[1] -eq "--show-current" } -MockWith { return "main" }
+    Mock -CommandName "git" -ParameterFilter { $PassThruArgs[0] -eq "branch" -and $PassThruArgs[1] -eq "--show-current" } -MockWith { return "blah" }
     Mock -CommandName "git" -ParameterFilter { $PassThruArgs[0] -eq "branch" -and $PassThruArgs[1] -eq "-r" } -MockWith { return @("origin/main") }
     Mock -CommandName "Start-Process" -MockWith {}
 
-    { Invoke-GitHubRepository -Branch } | Should -Throw -ExpectedMessage "Git branch 'main' does not exist at $repoUrl"
+    { Invoke-GitHubRepository -Branch } | Should -Throw -ExpectedMessage "Git branch 'blah' does not exist at $repoUrl"
   }
 }

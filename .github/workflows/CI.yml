@@ -8,7 +8,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+
+  #     - name: Install prerequisites
+  #       shell: pwsh
+  #       run: |
+  #         ./_build/bootstrap.ps1
+
+  #     - name: Run Pester tests
+  #       shell: pwsh
+  #       run: |
+  #         Invoke-Pester -Path "./src"
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    # needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -18,11 +36,7 @@ jobs:
         shell: pwsh
         run: |
           . "./_build/build.ps1"
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+          
       - name: Deploy to PowerShell Gallery
         env:
           PS_GALLERY_API_KEY: ${{ secrets.PS_GALLERY_API_KEY }}
