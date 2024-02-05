@@ -34,17 +34,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build module
+      - name: Build & publish module
         shell: pwsh
         run: |
-          . ./_build/build.ps1
-          
-      - name: Did it build
-        shell: pwsh
-        run: |
-          ls
-          
-      - name: Deploy to PowerShell Gallery
-        shell: pwsh
-        run: |
+          . ./_build/build.ps1 `
+          ls `
           Publish-Module -Path /dist -NuGetApiKey $env:PS_GALLERY_API_KEY
+          
